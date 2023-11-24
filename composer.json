@@ -1,0 +1,67 @@
+{
+    "name": "red-explosion/package_slug",
+    "description": "package_description",
+    "license": "MIT",
+    "homepage": "https://github.com/red-explosion/package_slug",
+    "type": "library",
+    "keywords": [
+        "red-explosion",
+        "laravel",
+        "package_slug"
+    ],
+    "authors": [
+        {
+            "name": "author_name",
+            "email": "author@email.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.10",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.6",
+        "pestphp/pest-plugin-arch": "^2.1",
+        "phpstan/phpstan": "^1.10",
+        "red-explosion/pint-config": "^1.1",
+        "spatie/laravel-ray": "^1.32"
+    },
+    "autoload": {
+        "psr-4": {
+            "RedExplosion\\Skeleton\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RedExplosion\\Skeleton\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "./vendor/bin/pint --config vendor/red-explosion/pint-config/pint.json",
+        "test:lint": "./vendor/bin/pint --config vendor/red-explosion/pint-config/pint.json --test",
+        "test:types": "./vendor/bin/phpstan analyse --ansi",
+        "test:unit": "./vendor/bin/pest --compact --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:unit"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RedExplosion\\Skeleton\\SkeletonServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

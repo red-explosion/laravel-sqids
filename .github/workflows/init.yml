@@ -1,0 +1,42 @@
+name: init package
+
+on:
+    push:
+        branches: [ main ]
+
+jobs:
+    init:
+        name: Init Package
+        runs-on: ubuntu-latest
+
+        # Only run this job when a repository has been created from the template, and it's an initial push (first commit)
+        if: github.repository != 'red-explosion/laravel-package-skeleton' && github.run_number == 1 && github.event.base_ref == null
+
+        steps:
+            - name: Checkout the code
+              uses: actions/checkout@v4
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: 8.2
+                coverage: none
+
+            - name: Init
+              run: php init.php "$PACKAGE_NAME" "$PACKAGE_DESCRIPTION" "$AUTHOR_NAME" "AUTHOR_USERNAME" "AUTHOR_EMAIL"
+              env:
+                  PACKAGE_NAME: ${{ github.event.repository.name }}
+                  PACKAGE_DESCRIPTION: ${{ github.event.repository.description }}
+                  AUTHOR_NAME: ${{ github.event.commits[0].author.name }}
+                  AUTHOR_USERNAME: ${{ github.actor }}
+                  AUTHOR_EMAIL: ${{ github.event.pusher.email }}
+
+            - name: Delete init files
+              run: |
+                  rm .github/workflows/init.yml
+                  rm init.php
+
+            - name: Commit changes
+              uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                commit_message: "chore: initialise project"

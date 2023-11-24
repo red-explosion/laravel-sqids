@@ -1,0 +1,20 @@
+# exclude OS files
+.DS_Store
+
+# exclude IDE files
+/.fleet
+/.idea
+/.vscode
+
+# exclude composer files
+/vendor
+
+# exclude local testing files
+.phpunit.cache
+phpunit.xml
+
+# exclude because with package development it doesnt matter and reduces unnecessary merge conflicts
+composer.lock
+
+# exclude local static analysis files
+phpstan.neon
