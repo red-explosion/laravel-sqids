@@ -17,7 +17,8 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0"
+        "illuminate/support": "^10.0",
+        "sqids/sqids": "^0.4.1"
     },
     "require-dev": {
         "laravel/pint": "^1.10",
