@@ -1,16 +1,10 @@
-# package_name
+# Laravel Sqids
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/red-explosion/package_slug.svg?style=flat-square)](https://packagist.org/packages/red-explosion/package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/red-explosion/package_slug/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/red-explosion/package_slug/actions/workflows/tests.yaml?query=branch:main)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/red-explosion/package_slug/coding-standards.yml?label=code%20style&style=flat-square)](https://github.com/red-explosion/package_slug/actions/workflows/coding-standards.yml?query=branch:main)
-[![Total Downloads](https://img.shields.io/packagist/dt/red-explosion/package_slug.svg?style=flat-square)](https://packagist.org/packages/red-explosion/package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Red Explosion Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/red-explosion/laravel-sqids.svg?style=flat-square)](https://packagist.org/packages/red-explosion/laravel-sqids)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/red-explosion/laravel-sqids/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/red-explosion/laravel-sqids/actions/workflows/tests.yaml?query=branch:main)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/red-explosion/laravel-sqids/coding-standards.yml?label=code%20style&style=flat-square)](https://github.com/red-explosion/laravel-sqids/actions/workflows/coding-standards.yml?query=branch:main)
+[![Total Downloads](https://img.shields.io/packagist/dt/red-explosion/laravel-sqids.svg?style=flat-square)](https://packagist.org/packages/red-explosion/laravel-sqids)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
----
-<!--/delete-->
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Installation
@@ -18,32 +12,32 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 You can install the package via composer:
 
 ```bash
-composer require red-explosion/package_slug
+composer require red-explosion/laravel-sqids
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="skeleton-migrations"
+php artisan vendor:publish --tag="sqids-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="skeleton-config"
+php artisan vendor:publish --tag="sqids-config"
 ```
 
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="skeleton-views"
+php artisan vendor:publish --tag="sqids-views"
 ```
 
 ## Usage
 
 ```php
-$variable = new RedExplosion\Skeleton();
+$variable = new RedExplosion\Sqids();
 echo $variable->echoPhrase('Hello, Red Explosion!');
 ```
 
@@ -68,9 +62,9 @@ vulnerabilities will be promptly addressed.
 
 ## Credits
 
-- [author_name](https://github.com/author_username)
+- [Ben Sherred](https://github.com/AUTHOR_USERNAME)
 - [All Contributors](../../contributors)
 
 ## License
 
-package_name is open-sourced software licensed under the [MIT license](LICENSE.md).
+Laravel Sqids is open-sourced software licensed under the [MIT license](LICENSE.md).

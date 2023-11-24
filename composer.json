@@ -1,18 +1,18 @@
 {
-    "name": "red-explosion/package_slug",
-    "description": "package_description",
+    "name": "red-explosion/laravel-sqids",
+    "description": "Generate YouTube/Stripe looking IDs for Laravel Eloquent models.",
     "license": "MIT",
-    "homepage": "https://github.com/red-explosion/package_slug",
+    "homepage": "https://github.com/red-explosion/laravel-sqids",
     "type": "library",
     "keywords": [
         "red-explosion",
         "laravel",
-        "package_slug"
+        "laravel-sqids"
     ],
     "authors": [
         {
-            "name": "author_name",
-            "email": "author@email.com"
+            "name": "Ben Sherred",
+            "email": "AUTHOR_EMAIL"
         }
     ],
     "require": {
@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "RedExplosion\\Skeleton\\": "src/"
+            "RedExplosion\\Sqids\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RedExplosion\\Skeleton\\Tests\\": "tests/"
+            "RedExplosion\\Sqids\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -52,7 +52,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "RedExplosion\\Skeleton\\SkeletonServiceProvider"
+                "RedExplosion\\Sqids\\SqidsServiceProvider"
             ]
         }
     },

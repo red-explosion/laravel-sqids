@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Skeleton;
+namespace RedExplosion\Sqids;
 
 use Illuminate\Support\ServiceProvider;
 
-class SkeletonServiceProvider extends ServiceProvider
+class SqidsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $this->mergeConfigFrom(
-            path: __DIR__ . '/../config/skeleton.php',
-            key: 'skeleton',
+            path: __DIR__ . '/../config/sqids.php',
+            key: 'sqids',
         );
     }
 
@@ -21,9 +21,9 @@ class SkeletonServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 paths: [
-                    __DIR__ . '/../config/skeleton.php' => config_path('skeleton.php'),
+                    __DIR__ . '/../config/sqids.php' => config_path('sqids.php'),
                 ],
-                groups: 'skeleton-config',
+                groups: 'sqids-config',
             );
         }
     }
