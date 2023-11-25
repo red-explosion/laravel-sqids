@@ -16,7 +16,12 @@ class Sqids
         $id = $model->getKey();
 
         $prefix = static::prefixForModel(model: $model);
-        $separator = '_';
+        $separator = config(key: 'sqids.separator');
+
+        if (!is_string(value: $separator)) {
+            $separator = '_';
+        }
+
         $sqid = static::encodeId(id: $id);
 
         return "{$prefix}{$separator}{$sqid}";
@@ -25,9 +30,25 @@ class Sqids
     public static function prefixForModel(Model $model): ?string
     {
         $classBasename = class_basename(class: $model);
-        $prefix = rtrim(mb_strimwidth(string: $classBasename, start: 0, width: 3, encoding: 'UTF-8'));
+        $prefixLength = config(key: 'sqids.prefix.length') ?? 3;
 
-        return Str::lower(value: $prefix);
+        if (!is_int(value: $prefixLength)) {
+            $prefixLength = 3;
+        }
+
+        $prefix = $prefixLength < 0
+            ? $classBasename
+            : rtrim(mb_strimwidth(string: $classBasename, start: 0, width: $prefixLength, encoding: 'UTF-8'));
+
+        return match (config(key: 'sqids.prefix.case')) {
+            'upper' => Str::upper(value: $prefix),
+            'camel' => Str::camel(value: $prefix),
+            'snake' => Str::snake(value: $prefix),
+            'kebab' => Str::kebab(value: $prefix),
+            'title' => Str::title(value: $prefix),
+            'studly' => Str::studly(value: $prefix),
+            default => Str::lower(value: $prefix),
+        };
     }
 
     public static function encodeId(int $id): string
@@ -42,6 +63,18 @@ class Sqids
 
     public static function encoder(): SqidsCore
     {
-        return new SqidsCore(minLength: 10);
+        $alphabet = config(key: 'sqids.alphabet') ?? '';
+        $minLength = config(key: 'sqids.length') ?? 10;
+        $blacklist = config(key: 'sqids.blacklist') ?? [];
+
+        if (!is_array($blacklist)) {
+            $blacklist = [];
+        }
+
+        return new SqidsCore(
+            alphabet: is_string(value: $alphabet) ? $alphabet : '',
+            minLength: is_int($minLength) ? $minLength : 10,
+            blocklist: array_merge(SqidsCore::DEFAULT_BLOCKLIST, $blacklist),
+        );
     }
 }
