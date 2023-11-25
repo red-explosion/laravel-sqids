@@ -16,7 +16,7 @@ class Sqids
         $id = $model->getKey();
 
         $prefix = static::prefixForModel(model: $model::class);
-        $separator = static::separator();
+        $separator = $prefix ? static::separator() : null;
         $sqid = static::encodeId(id: $id);
 
         return "{$prefix}{$separator}{$sqid}";
@@ -25,7 +25,11 @@ class Sqids
     public static function prefixForModel(string $model): ?string
     {
         $classBasename = class_basename(class: $model);
-        $prefixLength = Config::integer(key: 'sqids.prefix.length', default: 3);
+        $prefixLength = static::prefixLength();
+
+        if (!$prefixLength) {
+            return null;
+        }
 
         $prefix = $prefixLength < 0
             ? $classBasename
@@ -50,6 +54,11 @@ class Sqids
     public static function separator(): string
     {
         return Config::string(key: 'sqids.separator', default: '_');
+    }
+
+    public static function prefixLength(): int
+    {
+        return Config::integer(key: 'sqids.prefix.length', default: 3);
     }
 
     public static function encodeId(int $id): string

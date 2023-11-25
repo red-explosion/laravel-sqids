@@ -62,6 +62,8 @@ return [
     | the prefix and the casing. By default, the prefix will be generated
     | based on the model name.
     |
+    | Setting the prefix length to "0" will remove the prefix all together.
+    |
     | Supported Casing: "lower", "upper", "camel", "snake", "kebab",
     |         "title", "studly"
     |
