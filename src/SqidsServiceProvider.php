@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace RedExplosion\Sqids;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
+use RedExplosion\Sqids\Mixins\FindBySqidMixin;
 
 class SqidsServiceProvider extends ServiceProvider
 {
@@ -23,5 +25,12 @@ class SqidsServiceProvider extends ServiceProvider
                 groups: 'sqids-config',
             );
         }
+
+        $this->bootBuilderMixins();
+    }
+
+    protected function bootBuilderMixins(): void
+    {
+        Builder::mixin(new FindBySqidMixin());
     }
 }

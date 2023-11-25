@@ -16,7 +16,7 @@ class Sqids
         $id = $model->getKey();
 
         $prefix = static::prefixForModel(model: $model);
-        $separator = Config::string(key: 'sqids.separator', default: '_');
+        $separator = static::separator();
         $sqid = static::encodeId(id: $id);
 
         return "{$prefix}{$separator}{$sqid}";
@@ -42,6 +42,11 @@ class Sqids
         };
     }
 
+    public static function separator(): string
+    {
+        return Config::string(key: 'sqids.separator', default: '_');
+    }
+
     public static function encodeId(int $id): string
     {
         return static::encoder()->encode(numbers: [$id]);
@@ -49,6 +54,8 @@ class Sqids
 
     public static function decodeId(string $id): int
     {
+        $id = Str::afterLast(subject: $id, search: static::separator());
+
         return static::encoder()->decode(id: $id)[0];
     }
 
