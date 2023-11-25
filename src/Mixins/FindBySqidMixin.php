@@ -13,6 +13,6 @@ class FindBySqidMixin
 {
     public function findBySqid(): Closure
     {
-        return fn($id, $columns = ['*']) => $this->find(id: Sqids::decodeId(id: $id), columns: $columns);
+        return fn(string $id, array $columns = ['*']) => $this->find(id: Sqids::decodeId(id: $id), columns: $columns);
     }
 }

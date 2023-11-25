@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 use RedExplosion\Sqids\Mixins\FindBySqidMixin;
 use RedExplosion\Sqids\Mixins\WhereSqidMixin;
+use RedExplosion\Sqids\Mixins\WhereSqidsInMixin;
 
 class SqidsServiceProvider extends ServiceProvider
 {
@@ -34,5 +35,6 @@ class SqidsServiceProvider extends ServiceProvider
     {
         Builder::mixin(new FindBySqidMixin());
         Builder::mixin(new WhereSqidMixin());
+        Builder::mixin(new WhereSqidsInMixin());
     }
 }

@@ -13,6 +13,6 @@ class WhereSqidMixin
 {
     public function whereSqid(): Closure
     {
-        return fn($id) => $this->whereKey(id: Sqids::decodeId(id: $id));
+        return fn(string $id) => $this->whereKey(id: Sqids::decodeId(id: $id));
     }
 }

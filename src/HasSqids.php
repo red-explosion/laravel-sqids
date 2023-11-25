@@ -26,22 +26,6 @@ trait HasSqids
     /**
      * Retrieve the model for a bound value.
      *
-     * @param  mixed  $value
-     * @param  string|null  $field
-     * @return Model|null
-     */
-    //    public function resolveRouteBinding($value, $field = null): ?Model
-    //    {
-    //        if ($field !== null) {
-    //            return parent::resolveRouteBinding(value: $value, field: $field);
-    //        }
-    //
-    //        return $this->findBySqid($value);
-    //    }
-
-    /**
-     * Retrieve the model for a bound value.
-     *
      * @param  Model|Relation  $query
      * @param  mixed  $value
      * @param  null  $field
