@@ -9,7 +9,9 @@ return [
     | Alphabet
     |--------------------------------------------------------------------------
     |
-    | ...
+    | This option controls the default "alphabet" used for generating sqids.
+    | The characters and numbers listed below will be included. You must
+    | have at least 3 unique characters or numbers.
     |
     */
 
@@ -20,7 +22,8 @@ return [
     | Length
     |--------------------------------------------------------------------------
     |
-    | ...
+    | This option controls the "length" of the generated sqid excluding the
+    | prefix and separator. The value must be greater than 0.
     |
     */
 
@@ -31,7 +34,8 @@ return [
     | Blacklist
     |--------------------------------------------------------------------------
     |
-    | ...
+    | THis option allows you to "blacklist" certain words that shouldn't be
+    | included in the generated sqids.
     |
     */
 
@@ -39,10 +43,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Separator
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the "separator" between the prefix and the
+    | generatedsqid.
+    |
+    */
+
+    'separator' => '_',
+
+    /*
+    |--------------------------------------------------------------------------
     | Prefix
     |--------------------------------------------------------------------------
     |
-    | ...
+    | This option controls the sqid "prefix", You can control the length of
+    | the prefix and the casing. By default, the prefix will be generated
+    | based on the model name.
+    |
+    | Supported Casing: "lower", "upper", "camel", "snake", "kebab",
+    |         "title", "studly"
     |
     */
 
@@ -50,16 +71,5 @@ return [
         'length' => 3,
         'case' => 'lower',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Separator
-    |--------------------------------------------------------------------------
-    |
-    | ...
-    |
-    */
-
-    'separator' => '_',
 
 ];
