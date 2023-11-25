@@ -38,7 +38,7 @@ trait HasSqids
             return parent::resolveRouteBindingQuery(query: $query, value: $value, field: $field);
         }
 
-        return $this->whereSqid($value);
+        return $this->whereSqid(sqid: $value);
     }
 
     public static function keyFromSqid(string $sqid): ?int

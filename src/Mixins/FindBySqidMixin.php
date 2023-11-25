@@ -13,6 +13,6 @@ class FindBySqidMixin
     public function findBySqid(): Closure
     {
         /** @phpstan-ignore-next-line */
-        return fn(string $id, array $columns = ['*']) => $this->find(id: $this->getModel()->keyFromSqid(sqid: $id), columns: $columns);
+        return fn(string $sqid, array $columns = ['*']) => $this->find(id: $this->getModel()->keyFromSqid(sqid: $sqid), columns: $columns);
     }
 }

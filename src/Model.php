@@ -7,6 +7,7 @@ namespace RedExplosion\Sqids;
 use Error;
 use Exception;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Str;
 use RecursiveDirectoryIterator;
@@ -29,7 +30,23 @@ class Model
         }
 
         /** @phpstan-ignore-next-line */
-        return $model::query()->findBySqid(id: $sqid);
+        return $model::query()->findBySqid(sqid: $sqid);
+    }
+
+    public static function findOrFail(string $sqid): EloquentModel
+    {
+        $models = static::models();
+        $prefix = Str::beforeLast(subject: $sqid, search: Sqids::separator());
+
+        /** @var class-string<EloquentModel>|null $model */
+        $model = $models[$prefix] ?? null;
+
+        if (!$model) {
+            throw new ModelNotFoundException();
+        }
+
+        /** @phpstan-ignore-next-line */
+        return $model::query()->findOrFailBySqid(sqid: $sqid);
     }
 
     /**
