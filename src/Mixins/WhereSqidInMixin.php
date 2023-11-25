@@ -6,13 +6,19 @@ namespace RedExplosion\Sqids\Mixins;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 /** @mixin Builder */
-class WhereSqidsInMixin
+class WhereSqidInMixin
 {
-    public function whereSqidsIn(): Closure
+    public function whereSqidIn(): Closure
     {
-        return function (string $column, array $sqids, $boolean = 'and', $not = false) {
+        return function (array $sqids, $boolean = 'and', $not = false) {
+            /** @var Model $model */
+            $model = $this->getModel();
+
+            $column = $model->qualifyColumn(column: $model->getKeyName());
+
             /** @phpstan-ignore-next-line */
             $values = array_map(callback: fn(string $sqid) => $this->getModel()->keyFromSqid(sqid: $sqid), array: $sqids);
 

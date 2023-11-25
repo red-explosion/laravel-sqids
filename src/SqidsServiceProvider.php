@@ -9,7 +9,8 @@ use Illuminate\Support\ServiceProvider;
 use RedExplosion\Sqids\Mixins\FindBySqidMixin;
 use RedExplosion\Sqids\Mixins\FindOrFailBySqidMixin;
 use RedExplosion\Sqids\Mixins\WhereSqidMixin;
-use RedExplosion\Sqids\Mixins\WhereSqidsInMixin;
+use RedExplosion\Sqids\Mixins\WhereSqidInMixin;
+use RedExplosion\Sqids\Mixins\WhereSqidNotInMixin;
 
 class SqidsServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,8 @@ class SqidsServiceProvider extends ServiceProvider
     {
         Builder::mixin(new FindBySqidMixin());
         Builder::mixin(new FindOrFailBySqidMixin());
+        Builder::mixin(new WhereSqidInMixin());
         Builder::mixin(new WhereSqidMixin());
-        Builder::mixin(new WhereSqidsInMixin());
+        Builder::mixin(new WhereSqidNotInMixin());
     }
 }
