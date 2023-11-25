@@ -7,6 +7,7 @@ namespace RedExplosion\Sqids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Str;
 
 trait HasSqids
 {
@@ -38,5 +39,19 @@ trait HasSqids
         }
 
         return $this->whereSqid($value);
+    }
+
+    public static function keyFromSqid(string $sqid): ?int
+    {
+        $prefix = Str::beforeLast(subject: $sqid, search: Sqids::separator());
+        $expectedPrefix = Sqids::prefixForModel(model: __CLASS__);
+
+        if ($prefix !== $expectedPrefix) {
+            return null;
+        }
+
+        $sqid = Str::afterLast(subject: $sqid, search: Sqids::separator());
+
+        return Sqids::decodeId(id: $sqid)[0] ?? null;
     }
 }

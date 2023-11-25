@@ -15,14 +15,14 @@ class Sqids
         /** @var int $id */
         $id = $model->getKey();
 
-        $prefix = static::prefixForModel(model: $model);
+        $prefix = static::prefixForModel(model: $model::class);
         $separator = static::separator();
         $sqid = static::encodeId(id: $id);
 
         return "{$prefix}{$separator}{$sqid}";
     }
 
-    public static function prefixForModel(Model $model): ?string
+    public static function prefixForModel(string $model): ?string
     {
         $classBasename = class_basename(class: $model);
         $prefixLength = Config::integer(key: 'sqids.prefix.length', default: 3);
@@ -52,11 +52,9 @@ class Sqids
         return static::encoder()->encode(numbers: [$id]);
     }
 
-    public static function decodeId(string $id): int
+    public static function decodeId(string $id): array
     {
-        $id = Str::afterLast(subject: $id, search: static::separator());
-
-        return static::encoder()->decode(id: $id)[0];
+        return static::encoder()->decode(id: $id);
     }
 
     public static function encoder(): SqidsCore

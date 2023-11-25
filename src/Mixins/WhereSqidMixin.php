@@ -6,13 +6,13 @@ namespace RedExplosion\Sqids\Mixins;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use RedExplosion\Sqids\Sqids;
 
 /** @mixin Builder */
 class WhereSqidMixin
 {
     public function whereSqid(): Closure
     {
-        return fn(string $id) => $this->whereKey(id: Sqids::decodeId(id: $id));
+        /** @phpstan-ignore-next-line */
+        return fn(string $id) => $this->whereKey(id: $this->getModel()->keyFromSqid(sqid: $id));
     }
 }
