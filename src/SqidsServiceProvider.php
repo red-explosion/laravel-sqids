@@ -10,10 +10,7 @@ class SqidsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            path: __DIR__ . '/../config/sqids.php',
-            key: 'sqids',
-        );
+        $this->mergeConfigFrom(path: __DIR__ . '/../config/sqids.php', key: 'sqids');
     }
 
     public function boot(): void

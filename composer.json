@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "ext-mbstring": "*",
         "illuminate/support": "^10.0",
         "sqids/sqids": "^0.4.1"
     },
