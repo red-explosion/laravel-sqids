@@ -52,6 +52,13 @@ trait HasSqids
 
         $sqid = Str::afterLast(subject: $sqid, search: Sqids::separator());
 
+        $length = Str::length(value: $sqid);
+        $expectedLength = Sqids::length();
+
+        if ($length !== $expectedLength) {
+            return null;
+        }
+
         return Sqids::decodeId(id: $sqid)[0] ?? null;
     }
 }

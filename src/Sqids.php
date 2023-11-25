@@ -42,6 +42,11 @@ class Sqids
         };
     }
 
+    public static function length(): int
+    {
+        return Config::integer(key: 'sqids.length', default: 10);
+    }
+
     public static function separator(): string
     {
         return Config::string(key: 'sqids.separator', default: '_');
@@ -60,7 +65,7 @@ class Sqids
     public static function encoder(): SqidsCore
     {
         $alphabet = Config::string(key: 'sqids.alphabet', default: '');
-        $minLength = Config::integer(key: 'sqids.length', default: 10);
+        $minLength = static::length();
         $blacklist = array_merge(
             SqidsCore::DEFAULT_BLOCKLIST,
             Config::array(key: 'sqids.blacklist'),
