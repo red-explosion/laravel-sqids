@@ -6,8 +6,6 @@ namespace RedExplosion\Sqids;
 
 class Config
 {
-    protected static string $defaultAlphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-
     protected static int $defaultMinLength = 10;
 
     protected static array $defaultBlacklist = [];
@@ -20,13 +18,7 @@ class Config
 
     public static function alphabet(): string
     {
-        $alphabet = config(key: 'sqids.alphabet', default: static::$defaultAlphabet);
-
-        if (!$alphabet || !is_string(value: $alphabet)) {
-            return static::$defaultAlphabet;
-        }
-
-        return $alphabet;
+        return 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     }
 
     public static function minLength(): int

@@ -59,6 +59,6 @@ trait HasSqids
             return null;
         }
 
-        return Sqids::decodeId(id: $sqid)[0] ?? null;
+        return Sqids::decodeId(model: __CLASS__, id: $sqid)[0] ?? null;
     }
 }

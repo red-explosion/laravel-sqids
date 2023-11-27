@@ -6,19 +6,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Alphabet
-    |--------------------------------------------------------------------------
-    |
-    | This option controls the default "alphabet" used for generating sqids.
-    | The characters and numbers listed below will be included. You must
-    | have at least 3 unique characters or numbers.
-    |
-    */
-
-    'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-
-    /*
-    |--------------------------------------------------------------------------
     | Length
     |--------------------------------------------------------------------------
     |
