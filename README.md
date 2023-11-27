@@ -1,4 +1,4 @@
-<p align="center"><img width="300" src="/art/logo.svg" alt="Laravel Sqids Logo"></p>
+<p align="center"><img width="400" src="./art/logo.svg" alt="Laravel Sqids Logo"></p>
 
 # Laravel Sqids
 
