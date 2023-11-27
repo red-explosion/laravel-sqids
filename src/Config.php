@@ -6,36 +6,83 @@ namespace RedExplosion\Sqids;
 
 class Config
 {
-    public static function string(string $key, string $default): string
-    {
-        $value = config(key: $key, default: $default);
+    protected static string $defaultAlphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-        if (!is_string($value)) {
-            return $default;
+    protected static int $defaultMinLength = 10;
+
+    protected static array $defaultBlacklist = [];
+
+    protected static string $defaultSeparator = '_';
+
+    protected static int $defaultPrefixLength = 3;
+
+    protected static string $defaultPrefixCase = 'lower';
+
+    public static function alphabet(): string
+    {
+        $alphabet = config(key: 'sqids.alphabet', default: static::$defaultAlphabet);
+
+        if (!$alphabet || !is_string(value: $alphabet)) {
+            return static::$defaultAlphabet;
         }
 
-        return $value;
+        return $alphabet;
     }
 
-    public static function integer(string $key, int $default): int
+    public static function minLength(): int
     {
-        $value = config(key: $key, default: $default);
+        /** @var int|null $minLength */
+        $minLength = config(key: 'sqids.min_length', default: static::$defaultMinLength);
 
-        if (!is_int($value)) {
-            return $default;
+        if (null === $minLength) {
+            return static::$defaultMinLength;
         }
 
-        return $value;
+        return $minLength;
     }
 
-    public static function array(string $key, array $default = []): array
+    public static function blacklist(): array
     {
-        $value = config(key: $key, default: $default);
+        $blacklist = config(key: 'sqids.blacklist', default: static::$defaultBlacklist);
 
-        if (!is_array($value)) {
-            return $default;
+        if (!is_array($blacklist)) {
+            return static::$defaultBlacklist;
         }
 
-        return $value;
+        return $blacklist;
+    }
+
+    public static function separator(): string
+    {
+        $separator = config(key: 'sqids.separator', default: static::$defaultSeparator);
+
+        if (!$separator || !is_string(value: $separator)) {
+            return static::$defaultSeparator;
+        }
+
+        return $separator;
+    }
+
+    public static function prefixLength(): int
+    {
+        /** @var int|null $prefixLength */
+        $prefixLength = config(key: 'sqids.prefix.length', default: static::$defaultPrefixLength);
+
+        if (null === $prefixLength) {
+            return static::$defaultPrefixLength;
+        }
+
+        return $prefixLength;
+    }
+
+    public static function prefixCase(): string
+    {
+        $prefixCase = config(key: 'sqids.prefix.case', default: static::$defaultPrefixCase);
+
+        if (!$prefixCase || !is_string(value: $prefixCase)) {
+            return static::$defaultPrefixCase;
+        }
+
+        return $prefixCase;
     }
 }

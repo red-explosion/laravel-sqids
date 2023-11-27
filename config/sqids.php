@@ -22,12 +22,13 @@ return [
     | Length
     |--------------------------------------------------------------------------
     |
-    | This option controls the "length" of the generated sqid excluding the
-    | prefix and separator. The value must be greater than 0.
+    | This option controls the "minimum length" of the generated sqid
+    | excluding the prefix and separator. This value must be greater
+    | than 0.
     |
     */
 
-    'length' => 10,
+    'min_length' => 10,
 
     /*
     |--------------------------------------------------------------------------

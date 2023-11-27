@@ -43,20 +43,19 @@ trait HasSqids
 
     public static function keyFromSqid(string $sqid): ?int
     {
-        $prefixLength = Sqids::prefixLength();
-        $prefix = Str::beforeLast(subject: $sqid, search: Sqids::separator());
+        $prefixLength = Config::prefixLength();
+        $prefix = Str::beforeLast(subject: $sqid, search: Config::separator());
         $expectedPrefix = Sqids::prefixForModel(model: __CLASS__);
 
         if ($prefixLength && $prefix !== $expectedPrefix) {
             return null;
         }
 
-        $sqid = Str::afterLast(subject: $sqid, search: Sqids::separator());
+        $sqid = Str::afterLast(subject: $sqid, search: Config::separator());
 
         $length = Str::length(value: $sqid);
-        $expectedLength = Sqids::length();
 
-        if ($length !== $expectedLength) {
+        if ($length < Config::minLength()) {
             return null;
         }
 

@@ -20,7 +20,7 @@ class Model
     public static function find(string $sqid): ?EloquentModel
     {
         $models = static::models();
-        $prefix = Str::beforeLast(subject: $sqid, search: Sqids::separator());
+        $prefix = Str::beforeLast(subject: $sqid, search: Config::separator());
 
         /** @var class-string<EloquentModel>|null $model */
         $model = $models[$prefix] ?? null;
@@ -36,7 +36,7 @@ class Model
     public static function findOrFail(string $sqid): EloquentModel
     {
         $models = static::models();
-        $prefix = Str::beforeLast(subject: $sqid, search: Sqids::separator());
+        $prefix = Str::beforeLast(subject: $sqid, search: Config::separator());
 
         /** @var class-string<EloquentModel>|null $model */
         $model = $models[$prefix] ?? null;
