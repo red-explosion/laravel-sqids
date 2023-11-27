@@ -9,6 +9,8 @@ use Exception;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -46,7 +48,7 @@ class Model
         }
 
         /** @phpstan-ignore-next-line */
-        return $model::query()->findOrFailBySqid(sqid: $sqid);
+        return $model::query()->findBySqidOrFail(sqid: $sqid);
     }
 
     /**
@@ -81,15 +83,29 @@ class Model
         return $models;
     }
 
+    protected static function namespaces(): array
+    {
+        $composer = File::json(path: base_path(path: 'composer.json'));
+
+        /** @var array $namespaces */
+        $namespaces = Arr::get(array: $composer, key: 'autoload.psr-4', default: []);
+
+        return array_flip($namespaces);
+    }
+
     protected static function fullQualifiedClassNameFromFile(SplFileInfo $file): string
     {
         /** @var Application $application */
         $application = app();
 
-        return Str::of($file->getRealPath())
-            ->replaceFirst(search: base_path(), replace: '')
+        return Str::of(string: $file->getRealPath())
+            ->replaceFirst(search: static::basePath(), replace: '')
             ->replaceLast(search: '.php', replace: '')
             ->trim(characters: DIRECTORY_SEPARATOR)
+            ->replace(
+                search: array_keys(static::namespaces()),
+                replace: array_values(static::namespaces())
+            )
             ->ucfirst()
             ->replace(
                 search: [DIRECTORY_SEPARATOR, 'App\\'],
@@ -106,12 +122,12 @@ class Model
         $files = [];
 
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(
-            directory: app_path(),
+            directory: static::basePath(),
         ));
 
         /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            if ($file->isDir()) {
+            if ($file->isDir() || str_contains(haystack: $file->getRealPath(), needle: 'vendor')) {
                 continue;
             }
 
@@ -119,5 +135,19 @@ class Model
         }
 
         return $files;
+    }
+
+    protected static function basePath(): string
+    {
+        /** @var Application $application */
+        $application = app();
+
+        if ($application->runningUnitTests()) {
+            $basePath = new SplFileInfo(base_path(path: '../../../../'));
+
+            return $basePath->getRealPath();
+        }
+
+        return base_path();
     }
 }
