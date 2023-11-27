@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use RedExplosion\Sqids\Config;
+use RedExplosion\Sqids\Support\Config;
 
 it('can get the alphabet', function (): void {
     expect(Config::alphabet())

@@ -31,10 +31,10 @@ php artisan vendor:publish --provider="RedExplosion\Sqids\SqidsServiceProvider"
 
 ### Using Sqids
 
-To begin using Laravel Sqids, add the `RedExplosion\Sqids\HasSqids` trait to your model:
+To begin using Laravel Sqids, add the `RedExplosion\Sqids\Concerns\HasSqids` trait to your model:
 
 ```php
-use RedExplosion\Sqids\HasSqids;
+use RedExplosion\Sqids\Concerns\HasSqids;
 
 class User exted Authenticatable
 {
@@ -53,7 +53,7 @@ $sqid = $user->sqid; // use_A3EyoEb2TO
 If you would like to set a custom prefix for the model, you can add a `$sqidPrefix` property to your model like so:
 
 ```php
-use RedExplosion\Sqids\HasSqids;
+use RedExplosion\Sqids\Concerns\HasSqids;
 
 class User exted Authenticatable
 {

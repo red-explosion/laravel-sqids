@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Sqids;
+namespace RedExplosion\Sqids\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
+use RedExplosion\Sqids\Sqids;
+use RedExplosion\Sqids\Support\Config;
 
 trait HasSqids
 {

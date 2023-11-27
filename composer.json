@@ -18,6 +18,7 @@
     "require": {
         "php": "^8.2",
         "ext-mbstring": "*",
+        "illuminate/contracts": "^10.0",
         "illuminate/support": "^10.0",
         "sqids/sqids": "^0.4.1"
     },

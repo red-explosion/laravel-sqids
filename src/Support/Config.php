@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Sqids;
+namespace RedExplosion\Sqids\Support;
 
 class Config
 {

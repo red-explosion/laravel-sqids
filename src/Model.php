@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RedExplosion\Sqids\Concerns\HasSqids;
+use RedExplosion\Sqids\Support\Config;
 use ReflectionClass;
 use SplFileInfo;
 

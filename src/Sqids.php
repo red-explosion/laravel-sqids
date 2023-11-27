@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace RedExplosion\Sqids;
 
-use Sqids\Sqids as SqidsCore;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use RedExplosion\Sqids\Support\Config;
+use Sqids\Sqids as SqidsCore;
 
 class Sqids
 {
