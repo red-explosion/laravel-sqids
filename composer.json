@@ -1,6 +1,6 @@
 {
     "name": "red-explosion/laravel-sqids",
-    "description": "Generate YouTube/Stripe looking IDs for Laravel Eloquent models.",
+    "description": "Easily generate Stripe/YouTube looking IDs for your Laravel models.",
     "license": "MIT",
     "homepage": "https://github.com/red-explosion/laravel-sqids",
     "type": "library",
