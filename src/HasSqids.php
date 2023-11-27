@@ -16,6 +16,11 @@ trait HasSqids
         return Sqids::forModel(model: $this);
     }
 
+    public function getSqidPrefix(): ?string
+    {
+        return $this->sqidPrefix ?? null;
+    }
+
     /**
      * Get the route key for the model.
      */

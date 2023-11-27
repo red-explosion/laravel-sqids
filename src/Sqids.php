@@ -31,6 +31,14 @@ class Sqids
             return null;
         }
 
+        /** @var string|null $modelPrefix */
+        /** @phpstan-ignore-next-line */
+        $modelPrefix = (new $model())->getSqidPrefix();
+
+        if ($modelPrefix) {
+            return $modelPrefix;
+        }
+
         $prefix = $prefixLength < 0
             ? $classBasename
             : rtrim(mb_strimwidth(string: $classBasename, start: 0, width: $prefixLength, encoding: 'UTF-8'));
