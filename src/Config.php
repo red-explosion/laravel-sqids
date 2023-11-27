@@ -26,7 +26,7 @@ class Config
         /** @var int|null $minLength */
         $minLength = config(key: 'sqids.min_length', default: static::$defaultMinLength);
 
-        if (null === $minLength) {
+        if (!$minLength || !is_int($minLength)) {
             return static::$defaultMinLength;
         }
 
@@ -60,7 +60,7 @@ class Config
         /** @var int|null $prefixLength */
         $prefixLength = config(key: 'sqids.prefix.length', default: static::$defaultPrefixLength);
 
-        if (null === $prefixLength) {
+        if (!$prefixLength || !is_int($prefixLength)) {
             return static::$defaultPrefixLength;
         }
 

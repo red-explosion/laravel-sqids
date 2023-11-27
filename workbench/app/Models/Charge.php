@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Sqids\Tests\TestModels;
+namespace Workbench\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use RedExplosion\Sqids\HasSqids;
 
-class TestModel extends Model
+class Charge extends Model
 {
     use HasSqids;
 
-    protected $guarded = [];
+    protected string $sqidPrefix = 'ch';
 }
