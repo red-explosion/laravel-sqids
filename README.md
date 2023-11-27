@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/red-explosion/laravel-sqids/coding-standards.yml?label=code%20style&style=flat-square)](https://github.com/red-explosion/laravel-sqids/actions/workflows/coding-standards.yml?query=branch:main)
 [![Total Downloads](https://img.shields.io/packagist/dt/red-explosion/laravel-sqids.svg?style=flat-square)](https://packagist.org/packages/red-explosion/laravel-sqids)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+...
 
 ## Installation
 
@@ -15,31 +15,15 @@ You can install the package via composer:
 composer require red-explosion/laravel-sqids
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="sqids-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="sqids-config"
 ```
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="sqids-views"
-```
-
 ## Usage
 
-```php
-$variable = new RedExplosion\Sqids();
-echo $variable->echoPhrase('Hello, Red Explosion!');
-```
+...
 
 ## Testing
 
