@@ -131,7 +131,7 @@ use RedExplosion\Sqids\Model;
 $model = Model::find('usr_A3EyoEb2TO');
 ```
 
-> **Note**
+> [!NOTE]
 > Please note this feature only works when using model Sqid prefixes.
 
 ## Testing
