@@ -29,12 +29,23 @@ it('can find a model by its sqid or throw an exception', function (): void {
     Customer::findBySqidOrFail(sqid: 'invalid-sqid');
 });
 
+it('can get all models where sqid equals', function (): void {
+    $customer = CustomerFactory::new()->create();
+
+    CustomerFactory::new()->count(10)->create();
+
+    expect(Customer::whereSqid($customer->sqid)->get())
+        ->toBeInstanceOf(Collection::class)
+        ->first()->toBeInstanceOf(Customer::class)
+        ->first()->name->toBe($customer->name);
+});
+
 it('can get all models where sqid in', function (): void {
     $customer = CustomerFactory::new()->create();
 
     CustomerFactory::new()->count(10)->create();
 
-    expect(Customer::whereSqidIn([$customer->sqid])->get())
+    expect(Customer::whereSqidIn('id', [$customer->sqid])->get())
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
         ->pluck('id')->toContain($customer->id)
@@ -47,7 +58,7 @@ it('can get all models where sqid not in', function (): void {
 
     CustomerFactory::new()->count(10)->create();
 
-    expect(Customer::whereSqidNotIn([$customer->sqid])->get())
+    expect(Customer::whereSqidNotIn('id', [$customer->sqid])->get())
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(10)
         ->pluck('id')->not->toContain($customer->id);

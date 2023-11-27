@@ -13,11 +13,9 @@ class WhereSqidInMixin
 {
     public function whereSqidIn(): Closure
     {
-        return function (array $sqids, $boolean = 'and', $not = false) {
+        return function (string $column, array $sqids, $boolean = 'and', $not = false) {
             /** @var Model $model */
             $model = $this->getModel();
-
-            $column = $model->qualifyColumn(column: $model->getKeyName());
 
             /** @phpstan-ignore-next-line */
             $values = array_map(callback: fn(string $sqid) => $this->getModel()->keyFromSqid(sqid: $sqid), array: $sqids);

@@ -12,9 +12,9 @@ class WhereSqidNotInMixin
 {
     public function whereSqidNotIn(): Closure
     {
-        return function (array $sqids, $boolean = 'and') {
+        return function (string $column, array $sqids, $boolean = 'and') {
             /** @phpstan-ignore-next-line  */
-            return $this->whereSqidIn(sqids: $sqids, boolean: $boolean, not: true);
+            return $this->whereSqidIn(column: $column, sqids: $sqids, boolean: $boolean, not: true);
         };
     }
 }

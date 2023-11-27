@@ -91,11 +91,27 @@ $user = User::findBySqidOrFail('usr_invalid');
 
 ### Where Sqid in
 
-...
+To get all models where the Sqid is in a given array, you can use the `whereSqidIn` method:
+
+```php
+$users = User::query()
+    ->whereSqidIn('id', ['usr_invalid'])
+    ->get();
+```
+
+This will return all users where the `id` is in the array of decoded Sqids.
 
 ### Where Sqid not in
 
-...
+To get all models where the Sqid is not in a given array, you can use the `whereSqidNotIn` method:
+
+```php
+$users = User::query()
+    ->whereSqidNotIn('id', ['usr_invalid'])
+    ->get();
+```
+
+This will return all users where the `id` is not in the array of decoded Sqids.
 
 ### Route model binding
 
