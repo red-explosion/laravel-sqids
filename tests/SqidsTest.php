@@ -29,7 +29,6 @@ it('can get the sqid prefix for a model', function (): void {
         ->toBe('ch')
         ->and(Sqids::prefixForModel(model: $charge::class))
         ->toBe('ch');
-    ;
 });
 
 it('can encode an id and decode ids', function (): void {
