@@ -22,7 +22,7 @@ return [
     | Alphabet
     |--------------------------------------------------------------------------
     |
-    | This option controls the default "alphabet" used for generating sqids.
+    | This option controls the default "alphabet" used for generating Sqids.
     | The characters and numbers listed below will be included. You must
     | have at least 3 unique characters or numbers.
     |
@@ -35,7 +35,7 @@ return [
     | Length
     |--------------------------------------------------------------------------
     |
-    | This option controls the "minimum length" of the generated sqid
+    | This option controls the "minimum length" of the generated Sqid
     | excluding the prefix and separator. This value must be greater
     | than 0.
     |
@@ -49,7 +49,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | THis option allows you to "blacklist" certain words that shouldn't be
-    | included in the generated sqids.
+    | included in the generated Sqids.
     |
     */
 
@@ -61,7 +61,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This option controls the "separator" between the prefix and the
-    | generatedsqid.
+    | generated Sqid.
     |
     */
 
@@ -69,23 +69,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Prefix
+    | Prefix Class
     |--------------------------------------------------------------------------
     |
-    | This option controls the sqid "prefix", You can control the length of
-    | the prefix and the casing. By default, the prefix will be generated
-    | based on the model name.
-    |
-    | Setting the prefix length to "0" will remove the prefix all together.
-    |
-    | Supported Casing: "lower", "upper", "camel", "snake", "kebab",
-    |         "title", "studly"
+    | This option controls the class that should be used for generating the
+    | Sqid prefix. You can use any class that implements the following
+    | contract: \RedExplosion\Sqids\Contracts\Prefix.
     |
     */
 
-    'prefix' => [
-        'length' => 3,
-        'case' => 'lower',
-    ],
+    'prefix_class' => \RedExplosion\Sqids\Prefixes\ConstantPrefix::class,
 
 ];

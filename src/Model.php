@@ -77,9 +77,14 @@ class Model
             /** @phpstan-ignore-next-line */
             ->filter(fn(ReflectionClass $class) => in_array(needle: HasSqids::class, haystack: $class->getTraitNames()))
             /** @phpstan-ignore-next-line */
-            ->mapWithKeys(fn(ReflectionClass $reflectionClass) => [
-                Sqids::prefixForModel($reflectionClass->getName()) => $reflectionClass->getName()
-            ])
+            ->mapWithKeys(function (ReflectionClass $reflectionClass): array {
+                /** @var class-string<EloquentModel> $model */
+                $model = $reflectionClass->getName();
+
+                return [
+                    Sqids::prefixForModel($model) => $reflectionClass->getName(),
+                ];
+            })
             ->toArray();
 
         return $models;

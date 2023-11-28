@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use RedExplosion\Sqids\Prefixes\ConstantPrefix;
+use RedExplosion\Sqids\Prefixes\SimplePrefix;
 use RedExplosion\Sqids\Support\Config;
 
 it('can get the alphabet', function (): void {
@@ -52,26 +54,10 @@ it('can get the separator', function (): void {
     expect(Config::separator())->toBe('_');
 });
 
-it('can get the prefix length', function (): void {
-    expect(Config::prefixLength())->toBe(3);
+it('can get the prefix class', function (): void {
+    expect(Config::prefixClass())->toBeInstanceOf(ConstantPrefix::class);
 
-    config()->set('sqids.prefix.length', 4);
+    config()->set('sqids.prefix_class', SimplePrefix::class);
 
-    expect(Config::prefixLength())->toBe(4);
-
-    config()->set('sqids.prefix.length', '1');
-
-    expect(Config::prefixLength())->toBe(3);
-});
-
-it('can get the prefix case', function (): void {
-    expect(Config::prefixCase())->toBe('lower');
-
-    config()->set('sqids.prefix.case', 'upper');
-
-    expect(Config::prefixCase())->toBe('upper');
-
-    config()->set('sqids.prefix.case', 4);
-
-    expect(Config::prefixCase())->toBe('lower');
+    expect(Config::prefixClass())->toBeInstanceOf(SimplePrefix::class);
 });

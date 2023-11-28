@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace RedExplosion\Sqids\Support;
 
+use Exception;
+use RedExplosion\Sqids\Contracts\Prefix;
+use RedExplosion\Sqids\Prefixes\SimplePrefix;
+
 class Config
 {
     protected static string $defaultAlphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -74,26 +78,24 @@ class Config
         return $separator;
     }
 
-    public static function prefixLength(): int
+    public static function prefixClass(): ?Prefix
     {
-        /** @var int|null $prefixLength */
-        $prefixLength = config(key: 'sqids.prefix.length', default: static::$defaultPrefixLength);
+        $prefix = config(key: 'sqids.prefix_class');
 
-        if (!$prefixLength || !is_int($prefixLength)) {
-            return static::$defaultPrefixLength;
+        if (!$prefix) {
+            return null;
         }
 
-        return $prefixLength;
-    }
-
-    public static function prefixCase(): string
-    {
-        $prefixCase = config(key: 'sqids.prefix.case', default: static::$defaultPrefixCase);
-
-        if (!$prefixCase || !is_string(value: $prefixCase)) {
-            return static::$defaultPrefixCase;
+        try {
+            $prefix = new $prefix();
+        } catch (Exception) {
+            return new SimplePrefix();
         }
 
-        return $prefixCase;
+        if (!$prefix instanceof Prefix) {
+            return new SimplePrefix();
+        }
+
+        return new $prefix();
     }
 }

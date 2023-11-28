@@ -14,7 +14,7 @@ it('can generate a sqid for a model', function (): void {
 
     expect(Sqids::forModel(model: $customer))
         ->toBeString()
-        ->toStartWith('cus_');
+        ->toStartWith('cst_');
 });
 
 it('can get the sqid prefix for a model', function (): void {
@@ -24,7 +24,7 @@ it('can get the sqid prefix for a model', function (): void {
     expect($customer->getSqidPrefix())
         ->toBeNull()
         ->and(Sqids::prefixForModel(model: $customer::class))
-        ->toBe('cus')
+        ->toBe('cst')
         ->and($charge->getSqidPrefix())
         ->toBe('ch')
         ->and(Sqids::prefixForModel(model: $charge::class))

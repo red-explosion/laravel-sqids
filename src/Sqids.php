@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace RedExplosion\Sqids;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use RedExplosion\Sqids\Support\Config;
 use Sqids\Sqids as SqidsCore;
 
@@ -23,14 +22,13 @@ class Sqids
         return "{$prefix}{$separator}{$sqid}";
     }
 
+    /**
+     * @param  class-string<Model>  $model
+     * @return string
+     */
     public static function prefixForModel(string $model): ?string
     {
-        $classBasename = class_basename(class: $model);
-        $prefixLength = Config::prefixLength();
-
-        if (!$prefixLength) {
-            return null;
-        }
+        $prefixClass = Config::prefixClass();
 
         /** @var string|null $modelPrefix */
         /** @phpstan-ignore-next-line */
@@ -40,19 +38,11 @@ class Sqids
             return $modelPrefix;
         }
 
-        $prefix = $prefixLength < 0
-            ? $classBasename
-            : rtrim(mb_strimwidth(string: $classBasename, start: 0, width: $prefixLength, encoding: 'UTF-8'));
+        if (!$prefixClass) {
+            return null;
+        }
 
-        return match (Config::prefixCase()) {
-            'upper' => Str::upper(value: $prefix),
-            'camel' => Str::camel(value: $prefix),
-            'snake' => Str::snake(value: $prefix),
-            'kebab' => Str::kebab(value: $prefix),
-            'title' => Str::title(value: $prefix),
-            'studly' => Str::studly(value: $prefix),
-            default => Str::lower(value: $prefix),
-        };
+        return $prefixClass->prefix(model: $model);
     }
 
     public static function encodeId(string $model, int $id): string

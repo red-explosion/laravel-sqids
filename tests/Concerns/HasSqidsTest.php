@@ -11,7 +11,7 @@ it('can get the sqid attribute', function (): void {
 
     expect($customer->sqid)
         ->toBeString()
-        ->toStartWith('cus_');
+        ->toStartWith('cst_');
 });
 
 it('can get the sqid prefix', function (): void {
