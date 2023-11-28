@@ -10,17 +10,17 @@
 Laravel Sqids (pronounced "squids") allows you to easily generate Stripe/YouTube looking IDs for your Laravel models.
 These IDs are short and are guaranteed to be Collision free.
 
-For more information of Sqids, we recommend checking out the official Sqids (formerly Hashids) webiste: [https://sqids.org](https://sqids.org).
+For more information on Sqids, we recommend checking out the official Sqids (formerly Hashids) webiste: [https://sqids.org](https://sqids.org).
 
 ## Installation
 
-To get started, install Laravel Sqids using Composer:
+To get started, install Laravel Sqids via the Composer package manager:
 
 ```shell
 composer require red-explosion/laravel-sqids
 ```
 
-NExt, you should publish the Sqids configuration file using the `vendor:publish` artisan command. The `sqids`
+Next, you should publish the Sqids configuration file using the `vendor:publish` artisan command. The `sqids`
 configuration file will be placed in your applications `config` directory:
 
 ```shell
@@ -31,18 +31,18 @@ php artisan vendor:publish --provider="RedExplosion\Sqids\SqidsServiceProvider"
 
 ### Using Sqids
 
-To begin using Laravel Sqids, add the `RedExplosion\Sqids\Concerns\HasSqids` trait to your model:
+To use Laravel Sqids, simply add the `RedExplosion\Sqids\Concerns\HasSqids` trait to your model:
 
 ```php
 use RedExplosion\Sqids\Concerns\HasSqids;
 
-class User exted Authenticatable
+class User extends Authenticatable
 {
     use HasSqids;
 }
 ```
 
-You will be able able to access the Sqid for the model, by calling the `sqid` attribute:
+You will now be able to access the Sqid for the model, by calling the `sqid` attribute:
 
 ```php
 $user = User::first();
@@ -50,64 +50,73 @@ $user = User::first();
 $sqid = $user->sqid; // use_A3EyoEb2TO
 ```
 
-If you would like to set a custom prefix for the model, you can add a `$sqidPrefix` property to your model like so:
+If you would like to set a custom prefix for the model, you can override it by setting a `$sqidPrefix` property value
+on your model like so:
 
 ```php
 use RedExplosion\Sqids\Concerns\HasSqids;
 
-class User exted Authenticatable
+class User extends Authenticatable
 {
     use HasSqids;
     
-    protected string $sqidPrefix = 'usr';
+    protected string $sqidPrefix = 'user';
 }
 
 $user = User::first();
-$sqid = $user->sqid; // usr_A3EyoEb2TO
+$sqid = $user->sqid; // user_A3EyoEb2TO
 ```
 
 ### Builder Mixins
 
-Laravel Sqids provides a number of Builder mixins to make working with Sqids seamless.
+Laravel Sqids provides a number of Eloquent builder mixins to make working with Sqids seamless.
 
-### Find by Sqid
+#### Find by Sqid
 
-To find a model by a given sqid, you can use the `findBySqid` method:
+To find a model by a given Sqid, you can use the `findBySqid` method:
 
 ```php
-$user = User::findBySqid('usr_A3EyoEb2TO');
+$user = User::findBySqid('use_A3EyoEb2TO');
 ```
 
 If the model doesn't exist, `null` will be returned. However, if you would like to throw an exception, you can use
-`findBySqidOrFail`:
+the `findBySqidOrFail` method instead which will throw a `ModelNotFoundException` when a model can't be found:
 
 ```php
-$user = User::findBySqidOrFail('usr_invalid');
+$user = User::findBySqidOrFail('use_invalid');
 ```
 
-### Where Sqid
+#### Where Sqid
 
-...
+To add a where clause to your query, you can use the `whereSqid` method:
 
-### Where Sqid in
+```php
+$users = User::query()
+    ->whereSqid('id', 'use_A3EyoEb2TO')
+    ->get();
+```
+
+This will retrieve all users where the `id` is the decoded value of the Sqid.
+
+#### Where Sqid in
 
 To get all models where the Sqid is in a given array, you can use the `whereSqidIn` method:
 
 ```php
 $users = User::query()
-    ->whereSqidIn('id', ['usr_invalid'])
+    ->whereSqidIn('id', ['use_A3EyoEb2TO'])
     ->get();
 ```
 
 This will return all users where the `id` is in the array of decoded Sqids.
 
-### Where Sqid not in
+#### Where Sqid not in
 
 To get all models where the Sqid is not in a given array, you can use the `whereSqidNotIn` method:
 
 ```php
 $users = User::query()
-    ->whereSqidNotIn('id', ['usr_invalid'])
+    ->whereSqidNotIn('id', ['use_A3EyoEb2TO'])
     ->get();
 ```
 
@@ -128,18 +137,19 @@ Route::get('users/{user}', function (User $user) {
 ### Finding a model from a Sqid
 
 One of the most powerful features of Laravel Sqids is being able to resolve a model instance from a given Sqid. This
-could be incredibly powerful for searching models across your application. 
+could be incredibly powerful when searching models across your application. 
 
 ```php
 use RedExplosion\Sqids\Model;
 
-$model = Model::find('usr_A3EyoEb2TO');
+$model = Model::find('use_A3EyoEb2TO');
 ```
 
 When we run the following, `$user` will be an instance of the `User` model for the given Sqid. If no model could be
 found, then `null` will be returned.
 
-if you would like to throw an exception if a model can't be found, you can use the `findOrFail` method:
+if you would like to throw an exception instead, you can use the `findOrFail` method which will throw an instance of
+the `ModelNotFoundException`:
 
 ```php
 use RedExplosion\Sqids\Model;
@@ -148,7 +158,7 @@ $model = Model::find('usr_A3EyoEb2TO');
 ```
 
 > [!NOTE]
-> Please note this feature only works when using model Sqid prefixes.
+> In order to use this feature, you must use prefixes for your Sqids.
 
 ## Testing
 
