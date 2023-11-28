@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use RedExplosion\Sqids\Prefixes\ConstantPrefix;
+use RedExplosion\Sqids\Prefixes\ConsonantPrefix;
 use RedExplosion\Sqids\Prefixes\SimplePrefix;
 use RedExplosion\Sqids\Support\Config;
 
@@ -55,7 +55,7 @@ it('can get the separator', function (): void {
 });
 
 it('can get the prefix class', function (): void {
-    expect(Config::prefixClass())->toBeInstanceOf(ConstantPrefix::class);
+    expect(Config::prefixClass())->toBeInstanceOf(ConsonantPrefix::class);
 
     config()->set('sqids.prefix_class', SimplePrefix::class);
 

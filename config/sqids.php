@@ -78,6 +78,6 @@ return [
     |
     */
 
-    'prefix_class' => \RedExplosion\Sqids\Prefixes\ConstantPrefix::class,
+    'prefix_class' => \RedExplosion\Sqids\Prefixes\ConsonantPrefix::class,
 
 ];

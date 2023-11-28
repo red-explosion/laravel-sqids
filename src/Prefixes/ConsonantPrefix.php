@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use RedExplosion\Sqids\Contracts\Prefix;
 
-class ConstantPrefix implements Prefix
+class ConsonantPrefix implements Prefix
 {
     /**
-     * Use the first 3 constants as the model prefix.
+     * Use the first 3 consonants as the model prefix.
      *
      * @param  class-string<Model>  $model
      * @return string
