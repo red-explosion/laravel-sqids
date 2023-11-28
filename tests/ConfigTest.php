@@ -5,8 +5,15 @@ declare(strict_types=1);
 use RedExplosion\Sqids\Support\Config;
 
 it('can get the alphabet', function (): void {
-    expect(Config::alphabet())
-        ->toBe('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+    expect(Config::alphabet())->toBe('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+
+    config()->set('sqids.alphabet', 'abc');
+
+    expect(Config::alphabet())->toBe('abc');
+
+    config()->set('sqids.alphabet', 1);
+
+    expect(Config::alphabet())->toBe('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
 });
 
 it('can get the min length', function (): void {
