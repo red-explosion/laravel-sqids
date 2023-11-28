@@ -50,6 +50,9 @@ $user = User::first();
 $sqid = $user->sqid; // use_A3EyoEb2TO
 ```
 
+The result of `$sqid` will be encoded value of the models primary key along with the model prefix. **Note**: Only
+integers can be encoded and therefore we recommend using this package in conjunction with auto incrementing IDs.
+
 If you would like to set a custom prefix for the model, you can override it by setting a `$sqidPrefix` property value
 on your model like so:
 
@@ -92,11 +95,11 @@ To add a where clause to your query, you can use the `whereSqid` method:
 
 ```php
 $users = User::query()
-    ->whereSqid('id', 'use_A3EyoEb2TO')
+    ->whereSqid('use_A3EyoEb2TO')
     ->get();
 ```
 
-This will retrieve all users where the `id` is the decoded value of the Sqid.
+This will retrieve all users where the Sqid/primary key matches the given value.
 
 #### Where Sqid in
 
