@@ -50,8 +50,11 @@ $user = User::first();
 $sqid = $user->sqid; // use_A3EyoEb2TO
 ```
 
-The result of `$sqid` will be encoded value of the models primary key along with the model prefix. **Note**: Only
-integers can be encoded and therefore we recommend using this package in conjunction with auto incrementing IDs.
+The result of `$sqid` will be encoded value of the models primary key along with the model prefix.
+
+> [!Tip]
+> Only integers can be encoded, and therefore we recommend using this package in conjunction with auto
+incrementing IDs.
 
 If you would like to set a custom prefix for the model, you can override it by setting a `$sqidPrefix` property value
 on your model like so:
@@ -160,7 +163,7 @@ use RedExplosion\Sqids\Model;
 $model = Model::find('use_A3EyoEb2TO');
 ```
 
-> [!NOTE]
+> [!IMPORTANT]
 > In order to use this feature, you must use prefixes for your Sqids.
 
 ## Testing
