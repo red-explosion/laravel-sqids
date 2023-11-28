@@ -10,7 +10,7 @@
 Laravel Sqids (pronounced "squids") allows you to easily generate Stripe/YouTube looking IDs for your Laravel models.
 These IDs are short and are guaranteed to be Collision free.
 
-For more information on Sqids, we recommend checking out the official Sqids (formerly Hashids) webiste: [https://sqids.org](https://sqids.org).
+For more information on Sqids, we recommend checking out the official Sqids (formerly Hashids) website: [https://sqids.org](https://sqids.org).
 
 ## Installation
 

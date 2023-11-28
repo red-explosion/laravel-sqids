@@ -6,6 +6,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Shuffle Key
+    |--------------------------------------------------------------------------
+    |
+    | This option is used to control the "shuffle key" for your Sqids. This
+    | ensures that your Sqids are unique to your application. Changing
+    | this value will result in all Sqids having a new value.
+    |
+    */
+
+    'shuffle_key' => env('APP_KEY'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Alphabet
     |--------------------------------------------------------------------------
     |

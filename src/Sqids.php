@@ -79,18 +79,19 @@ class Sqids
     public static function alphabetForModel(string $model): string
     {
         $alphabet = Config::alphabet();
-        $modelLength = mb_strlen(string: $model);
+        $shuffle = $model . Config::shuffleKey();
+        $shuffleLength = mb_strlen(string: $shuffle);
 
-        if (!$modelLength) {
+        if (!$shuffleLength) {
             return Config::alphabet();
         }
 
         $alphabetArray = static::multiByteSplit(string: Config::alphabet());
-        $modelArray = static::multiByteSplit(string: $model);
+        $shuffleArray = static::multiByteSplit(string: $shuffle);
 
         for ($i = mb_strlen($alphabet) - 1, $v = 0, $p = 0; $i > 0; $i--, $v++) {
-            $v %= $modelLength;
-            $p += $int = mb_ord($modelArray[$v], 'UTF-8');
+            $v %= $shuffleLength;
+            $p += $int = mb_ord($shuffleArray[$v], 'UTF-8');
             $j = ($int + $v + $p) % $i;
 
             $temp = $alphabetArray[$j];

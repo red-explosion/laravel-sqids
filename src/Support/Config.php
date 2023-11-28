@@ -18,6 +18,17 @@ class Config
 
     protected static string $defaultPrefixCase = 'lower';
 
+    public static function shuffleKey(): ?string
+    {
+        $shuffleKey = config(key: 'sqids.shuffle_key');
+
+        if (!is_string($shuffleKey)) {
+            return null;
+        }
+
+        return $shuffleKey;
+    }
+
     public static function alphabet(): string
     {
         $alphabet = config(key: 'sqids.alphabet');
