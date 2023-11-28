@@ -128,7 +128,7 @@ Laravel Sqids supports route model binding out of the box. Simply create a route
 care of the rest:
 
 ```php
-// GET /users/usr_A3EyoEb2TO
+// GET /users/use_A3EyoEb2TO
 Route::get('users/{user}', function (User $user) {
     return "Hello $user->name";
 });
@@ -154,7 +154,7 @@ the `ModelNotFoundException`:
 ```php
 use RedExplosion\Sqids\Model;
 
-$model = Model::find('usr_A3EyoEb2TO');
+$model = Model::find('use_A3EyoEb2TO');
 ```
 
 > [!NOTE]
