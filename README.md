@@ -160,7 +160,7 @@ the `ModelNotFoundException`:
 ```php
 use RedExplosion\Sqids\Model;
 
-$model = Model::find('use_A3EyoEb2TO');
+$model = Model::findOrFail('use_A3EyoEb2TO');
 ```
 
 > [!IMPORTANT]
