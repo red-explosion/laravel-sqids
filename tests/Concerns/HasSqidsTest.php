@@ -31,7 +31,7 @@ it('can get the key from the sqid', function (): void {
         ->toBe(1);
 });
 
-it('can append the sqid to the model array', function (): void {
+it('appends the sqid to the model array', function (): void {
     $customer = CustomerFactory::new()->create();
 
     expect($customer->toArray())
