@@ -60,4 +60,16 @@ trait HasSqids
 
         return Sqids::decodeId(model: __CLASS__, id: $sqid)[0] ?? null;
     }
+
+    /**
+     * Get all of the appendable values that are arrayable.
+     *
+     * @return array
+     */
+    protected function getArrayableAppends()
+    {
+        $this->appends = array_unique(array_merge($this->appends, ['sqid']));
+
+        return parent::getArrayableAppends();
+    }
 }
