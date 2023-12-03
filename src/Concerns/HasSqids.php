@@ -13,7 +13,7 @@ use RedExplosion\Sqids\Support\Config;
 
 trait HasSqids
 {
-    protected function initializeHasSqids()
+    protected function initializeHasSqids(): void
     {
         $this->append(['sqid']);
     }
