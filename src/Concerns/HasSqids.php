@@ -13,6 +13,11 @@ use RedExplosion\Sqids\Support\Config;
 
 trait HasSqids
 {
+    protected function initializeHasSqids(): void
+    {
+        $this->append(['sqid']);
+    }
+
     public function getSqidAttribute(): ?string
     {
         return Sqids::forModel(model: $this);
