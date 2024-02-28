@@ -43,7 +43,7 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  composer require "illuminate/contracts:${{ matrix.laravel }}" --no-interaction --no-progress --no-update
+                  composer require "illuminate/contracts:^${{ matrix.laravel }}" --no-interaction --no-progress --no-update
                   composer update --prefer-dist --no-interaction --no-progress
 
             - name: Execute the tests
