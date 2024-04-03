@@ -48,7 +48,7 @@ return [
     | Blacklist
     |--------------------------------------------------------------------------
     |
-    | THis option allows you to "blacklist" certain words that shouldn't be
+    | This option allows you to "blacklist" certain words that shouldn't be
     | included in the generated Sqids.
     |
     */
