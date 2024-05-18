@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 use RedExplosion\Sqids\Mixins\FindBySqidMixin;
 use RedExplosion\Sqids\Mixins\FindBySqidOrFailMixin;
-use RedExplosion\Sqids\Mixins\WhereSqidMixin;
 use RedExplosion\Sqids\Mixins\WhereSqidInMixin;
+use RedExplosion\Sqids\Mixins\WhereSqidMixin;
 use RedExplosion\Sqids\Mixins\WhereSqidNotInMixin;
 
 class SqidsServiceProvider extends ServiceProvider

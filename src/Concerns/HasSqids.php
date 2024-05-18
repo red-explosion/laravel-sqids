@@ -42,7 +42,6 @@ trait HasSqids
      * @param  Model|Relation  $query
      * @param  mixed  $value
      * @param  null  $field
-     * @return Builder|Relation
      */
     public function resolveRouteBindingQuery($query, $value, $field = null): Builder|Relation
     {

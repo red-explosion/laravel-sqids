@@ -14,7 +14,6 @@ class SimplePrefix implements Prefix
      * Use the first 3 characters as the model prefix.
      *
      * @param  class-string<Model>  $model
-     * @return string
      */
     public function prefix(string $model): string
     {

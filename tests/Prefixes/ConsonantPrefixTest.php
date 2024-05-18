@@ -12,5 +12,4 @@ it(description: 'can generate a prefix without vowels', closure: function (): vo
         ->toBe(expected: 'cst')
         ->prefix(model: Charge::class)
         ->toBe(expected: 'chr');
-    ;
 });

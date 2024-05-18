@@ -24,6 +24,6 @@ it('can bind a model from a sqid without a prefix', function (): void {
 
 it('returns a 404 if the sqid is invalid', function (): void {
     $this
-        ->get(uri: "/customers/invalid-sqid")
+        ->get(uri: '/customers/invalid-sqid')
         ->assertNotFound();
 });

@@ -24,7 +24,6 @@ class Sqids
 
     /**
      * @param  class-string<Model>  $model
-     * @return string
      */
     public static function prefixForModel(string $model): ?string
     {
@@ -38,7 +37,7 @@ class Sqids
             return $modelPrefix;
         }
 
-        if (!$prefixClass) {
+        if (! $prefixClass) {
             return null;
         }
 
@@ -50,6 +49,9 @@ class Sqids
         return static::encoder(model: $model)->encode(numbers: [$id]);
     }
 
+    /**
+     * @return array<int, int>
+     */
     public static function decodeId(string $model, string $id): array
     {
         return static::encoder(model: $model)->decode(id: $id);
@@ -72,7 +74,7 @@ class Sqids
         $shuffle = $model . Config::shuffleKey();
         $shuffleLength = mb_strlen(string: $shuffle);
 
-        if (!$shuffleLength) {
+        if (! $shuffleLength) {
             return Config::alphabet();
         }
 
@@ -92,6 +94,9 @@ class Sqids
         return implode(separator: '', array: $alphabetArray);
     }
 
+    /**
+     * @return array<int, string>
+     */
     protected static function multiByteSplit(string $string): array
     {
         return preg_split(pattern: '/(?!^)(?=.)/u', subject: $string) ?: [];
