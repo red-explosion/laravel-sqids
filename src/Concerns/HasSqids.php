@@ -18,7 +18,7 @@ trait HasSqids
         $this->append(['sqid']);
     }
 
-    public function getSqidAttribute(): ?string
+    public function getSqidAttribute(): string
     {
         return Sqids::forModel(model: $this);
     }
