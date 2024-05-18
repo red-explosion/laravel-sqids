@@ -10,7 +10,6 @@ interface Prefix
 {
     /**
      * @param  class-string<Model>  $model
-     * @return string
      */
     public function prefix(string $model): string;
 }

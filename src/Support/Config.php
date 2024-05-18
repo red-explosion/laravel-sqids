@@ -14,6 +14,9 @@ class Config
 
     protected static int $defaultMinLength = 10;
 
+    /**
+     * @var array<int, string>
+     */
     protected static array $defaultBlacklist = [];
 
     protected static string $defaultSeparator = '_';
@@ -26,7 +29,7 @@ class Config
     {
         $shuffleKey = config(key: 'sqids.shuffle_key');
 
-        if (!is_string($shuffleKey)) {
+        if (! is_string($shuffleKey)) {
             return null;
         }
 
@@ -37,7 +40,7 @@ class Config
     {
         $alphabet = config(key: 'sqids.alphabet');
 
-        if (!$alphabet || !is_string($alphabet)) {
+        if (! $alphabet || ! is_string($alphabet)) {
             return static::$defaultAlphabet;
         }
 
@@ -49,18 +52,21 @@ class Config
         /** @var int|null $minLength */
         $minLength = config(key: 'sqids.min_length', default: static::$defaultMinLength);
 
-        if (!$minLength || !is_int($minLength)) {
+        if (! $minLength || ! is_int($minLength)) {
             return static::$defaultMinLength;
         }
 
         return $minLength;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function blacklist(): array
     {
         $blacklist = config(key: 'sqids.blacklist', default: static::$defaultBlacklist);
 
-        if (!is_array($blacklist)) {
+        if (! is_array($blacklist)) {
             return static::$defaultBlacklist;
         }
 
@@ -71,7 +77,7 @@ class Config
     {
         $separator = config(key: 'sqids.separator', default: static::$defaultSeparator);
 
-        if (!$separator || !is_string(value: $separator)) {
+        if (! $separator || ! is_string(value: $separator)) {
             return static::$defaultSeparator;
         }
 
@@ -82,7 +88,7 @@ class Config
     {
         $prefix = config(key: 'sqids.prefix_class');
 
-        if (!$prefix) {
+        if (! $prefix) {
             return null;
         }
 
@@ -92,7 +98,7 @@ class Config
             return new SimplePrefix();
         }
 
-        if (!$prefix instanceof Prefix) {
+        if (! $prefix instanceof Prefix) {
             return new SimplePrefix();
         }
 

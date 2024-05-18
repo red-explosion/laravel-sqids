@@ -18,7 +18,7 @@ class WhereSqidInMixin
             $model = $this->getModel();
 
             /** @phpstan-ignore-next-line */
-            $values = array_map(callback: fn(string $sqid) => $this->getModel()->keyFromSqid(sqid: $sqid), array: $sqids);
+            $values = array_map(callback: fn (string $sqid) => $this->getModel()->keyFromSqid(sqid: $sqid), array: $sqids);
 
             return $this->whereIn(column: $column, values: $values, boolean: $boolean, not: $not);
         };

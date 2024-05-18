@@ -29,7 +29,7 @@ class Model
         /** @var class-string<EloquentModel>|null $model */
         $model = $models[$prefix] ?? null;
 
-        if (!$model) {
+        if (! $model) {
             return null;
         }
 
@@ -45,7 +45,7 @@ class Model
         /** @var class-string<EloquentModel>|null $model */
         $model = $models[$prefix] ?? null;
 
-        if (!$model) {
+        if (! $model) {
             throw new ModelNotFoundException();
         }
 
@@ -60,7 +60,7 @@ class Model
     {
         /** @var array<string, class-string<EloquentModel>> $models */
         $models = collect(static::getFilesRecursively())
-            ->map(fn(SplFileInfo $file) => self::fullQualifiedClassNameFromFile(file: $file))
+            ->map(fn (SplFileInfo $file) => self::fullQualifiedClassNameFromFile(file: $file))
             ->map(function (string $class): ?ReflectionClass {
                 try {
                     /** @phpstan-ignore-next-line */
@@ -71,11 +71,11 @@ class Model
             })
             ->filter()
             /** @phpstan-ignore-next-line */
-            ->filter(fn(ReflectionClass $class): bool => $class->isSubclassOf(class: EloquentModel::class))
+            ->filter(fn (ReflectionClass $class): bool => $class->isSubclassOf(class: EloquentModel::class))
             /** @phpstan-ignore-next-line */
-            ->filter(fn(ReflectionClass $class) => !$class->isAbstract())
+            ->filter(fn (ReflectionClass $class) => ! $class->isAbstract())
             /** @phpstan-ignore-next-line */
-            ->filter(fn(ReflectionClass $class) => in_array(needle: HasSqids::class, haystack: $class->getTraitNames()))
+            ->filter(fn (ReflectionClass $class) => in_array(needle: HasSqids::class, haystack: $class->getTraitNames()))
             /** @phpstan-ignore-next-line */
             ->mapWithKeys(function (ReflectionClass $reflectionClass): array {
                 /** @var class-string<EloquentModel> $model */
@@ -90,11 +90,14 @@ class Model
         return $models;
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected static function namespaces(): array
     {
         $composer = File::json(path: base_path(path: 'composer.json'));
 
-        /** @var array $namespaces */
+        /** @var array<string, string> $namespaces */
         $namespaces = Arr::get(array: $composer, key: 'autoload.psr-4', default: []);
 
         return array_flip($namespaces);

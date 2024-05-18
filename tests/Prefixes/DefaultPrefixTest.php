@@ -12,5 +12,4 @@ it(description: 'can generate a default prefix', closure: function (): void {
         ->toBe(expected: 'cus')
         ->prefix(model: Charge::class)
         ->toBe(expected: 'cha');
-    ;
 });

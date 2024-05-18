@@ -14,7 +14,6 @@ class ConsonantPrefix implements Prefix
      * Use the first 3 consonants as the model prefix.
      *
      * @param  class-string<Model>  $model
-     * @return string
      */
     public function prefix(string $model): string
     {
