@@ -10,10 +10,14 @@ use Sqids\Sqids as SqidsCore;
 
 class Sqids
 {
-    public static function forModel(Model $model): string
+    public static function forModel(Model $model): ?string
     {
         /** @var int $id */
         $id = $model->getKey();
+
+        if ($id === null) {
+            return null;
+        }
 
         $prefix = static::prefixForModel(model: $model::class);
         $separator = $prefix ? Config::separator() : null;
