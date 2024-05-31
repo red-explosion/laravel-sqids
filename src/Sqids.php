@@ -44,9 +44,9 @@ class Sqids
         return $prefixClass->prefix(model: $model);
     }
 
-    public static function encodeId(string $model, int $id): string
+    public static function encodeId(string $model, ?int $id): ?string
     {
-        return static::encoder(model: $model)->encode(numbers: [$id]);
+        return $id !== null ? static::encoder(model: $model)->encode(numbers: [$id]) : null;
     }
 
     /**
