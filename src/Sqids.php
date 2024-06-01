@@ -12,7 +12,7 @@ class Sqids
 {
     public static function forModel(Model $model): ?string
     {
-        /** @var int $id */
+        /** @var int|null $id */
         $id = $model->getKey();
 
         if ($id === null) {
