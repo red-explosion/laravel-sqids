@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.2.2 - 2024-06-01
+
+### What's Changed
+
+* sqid return null when id is null (new unsaved model) by @mrl22 in https://github.com/red-explosion/laravel-sqids/pull/8
+
+### New Contributors
+
+* @mrl22 made their first contribution in https://github.com/red-explosion/laravel-sqids/pull/8
+
+**Full Changelog**: https://github.com/red-explosion/laravel-sqids/compare/v1.2.1...v1.2.2
+
 ## v1.2.1 - 2024-05-18
 
 ### What's Changed
