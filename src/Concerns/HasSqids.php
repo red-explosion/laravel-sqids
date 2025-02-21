@@ -45,7 +45,11 @@ trait HasSqids
      */
     public function resolveRouteBindingQuery($query, $value, $field = null): Builder|Relation
     {
-        if ($field && $field !== $this->getRouteKeyName()) {
+        if ($field && $field !== 'sqid') {
+            return parent::resolveRouteBindingQuery(query: $query, value: $value, field: $field);
+        }
+
+        if (! $field && $this->getRouteKeyName() !== 'sqid') {
             return parent::resolveRouteBindingQuery(query: $query, value: $value, field: $field);
         }
 
