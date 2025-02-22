@@ -5,21 +5,22 @@ declare(strict_types=1);
 namespace Workbench\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Workbench\App\Models\Customer;
+use Illuminate\Support\Str;
+use Workbench\App\Models\Post;
 
 /**
- * @phpstan-type TModel \Workbench\App\Models\Customer
+ * @phpstan-type TModel \Workbench\App\Models\Post
  *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<TModel>
  */
-class CustomerFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var class-string<\Illuminate\Database\Eloquent\Model|TModel>
      */
-    protected $model = Customer::class;
+    protected $model = Post::class;
 
     /**
      * Define the model's default state.
@@ -29,8 +30,8 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'username' => $this->faker->username(),
+            'title' => $title = $this->faker->sentence(),
+            'slug' => Str::slug($title),
         ];
     }
 }
