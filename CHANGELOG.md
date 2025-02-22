@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.2.3 - 2025-02-22
+
+### What's Changed
+
+* Fix route model binding when overriding getRouteKeyName by @bensherred in https://github.com/red-explosion/laravel-sqids/pull/10
+
+**Full Changelog**: https://github.com/red-explosion/laravel-sqids/compare/v1.2.2...v1.2.3
+
 ## v1.2.2 - 2024-06-01
 
 ### What's Changed
