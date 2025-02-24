@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.3.0 - 2025-02-24
+
+### What's Changed
+
+* Add support for Laravel 12 by @bensherred in https://github.com/red-explosion/laravel-sqids/pull/11
+
+**Full Changelog**: https://github.com/red-explosion/laravel-sqids/compare/v1.2.3...v1.3.0
+
 ## v1.2.3 - 2025-02-22
 
 ### What's Changed
