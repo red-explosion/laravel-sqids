@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.3.1 - 2025-04-11
+
+### What's Changed
+
+* ci: fix tests workflow by @bensherred in https://github.com/red-explosion/laravel-sqids/pull/14
+* Fix scoped route model binding by @bencarr in https://github.com/red-explosion/laravel-sqids/pull/13
+
+### New Contributors
+
+* @bencarr made their first contribution in https://github.com/red-explosion/laravel-sqids/pull/13
+
+**Full Changelog**: https://github.com/red-explosion/laravel-sqids/compare/v1.3.0...v1.3.1
+
 ## v1.3.0 - 2025-02-24
 
 ### What's Changed
