@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Workbench\Database\Factories\ChargeFactory;
 use Workbench\Database\Factories\CustomerFactory;
 use Workbench\Database\Factories\PostFactory;
 
@@ -43,4 +44,22 @@ it('can bind a model when the route key has been overridden', function (): void 
     $this
         ->get(uri: "/posts/{$post->slug}")
         ->assertContent(value: $post->title);
+});
+
+it('can scope route model bindings', function (): void {
+    $customer = CustomerFactory::new()->create();
+    $charge = ChargeFactory::new()->for($customer)->create();
+
+    $this
+        ->get(uri: "/customers/{$customer->sqid}/{$charge->sqid}")
+        ->assertContent(value: $charge->sqid);
+});
+
+it('returns a 404 if the child isn’t scoped to the parent', function (): void {
+    $customer = CustomerFactory::new()->create();
+    $charge = ChargeFactory::new()->create();
+
+    $this
+        ->get(uri: "/customers/{$customer->sqid}/{$charge->sqid}")
+        ->assertNotFound();
 });
