@@ -1,5 +1,3 @@
-<p align="center"><img width="400" src="./art/logo.svg" alt="Laravel Sqids Logo"></p>
-
 # Laravel Sqids
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/red-explosion/laravel-sqids.svg?style=flat-square)](https://packagist.org/packages/red-explosion/laravel-sqids)
@@ -10,21 +8,21 @@
 Laravel Sqids (pronounced "squids") allows you to easily generate Stripe/YouTube looking IDs for your Laravel models.
 These IDs are short and are guaranteed to be Collision free.
 
-For more information on Sqids, we recommend checking out the official Sqids (formerly Hashids) website: [https://sqids.org](https://sqids.org).
+For more information on Sqids, we recommend checking out the official Sqids (formerly Hashids) website:
+[https://sqids.org](https://sqids.org).
 
 ## Installation
 
-To get started, install Laravel Sqids via the Composer package manager:
+You can install the package via composer:
 
 ```shell
 composer require red-explosion/laravel-sqids
 ```
 
-Next, you should publish the Sqids configuration file using the `vendor:publish` artisan command. The `sqids`
-configuration file will be placed in your applications `config` directory:
+You can publish the config file with:
 
 ```shell
-php artisan vendor:publish --provider="RedExplosion\Sqids\SqidsServiceProvider"
+php artisan vendor:publish --tag="sqids-config"
 ```
 
 ## Usage
@@ -47,7 +45,7 @@ You will now be able to access the Sqid for the model, by calling the `sqid` att
 ```php
 $user = User::first();
 
-$sqid = $user->sqid; // use_A3EyoEb2TO
+$sqid = $user->sqid; // usr_A3EyoEb2TO
 ```
 
 The result of `$sqid` will be encoded value of the models primary key along with the model prefix.
@@ -82,14 +80,14 @@ Laravel Sqids provides a number of Eloquent builder mixins to make working with 
 To find a model by a given Sqid, you can use the `findBySqid` method:
 
 ```php
-$user = User::findBySqid('use_A3EyoEb2TO');
+$user = User::findBySqid('usr_A3EyoEb2TO');
 ```
 
 If the model doesn't exist, `null` will be returned. However, if you would like to throw an exception, you can use
 the `findBySqidOrFail` method instead which will throw a `ModelNotFoundException` when a model can't be found:
 
 ```php
-$user = User::findBySqidOrFail('use_invalid');
+$user = User::findBySqidOrFail('usr_invalid');
 ```
 
 #### Where Sqid
@@ -98,7 +96,7 @@ To add a where clause to your query, you can use the `whereSqid` method:
 
 ```php
 $users = User::query()
-    ->whereSqid('use_A3EyoEb2TO')
+    ->whereSqid('usr_A3EyoEb2TO')
     ->get();
 ```
 
@@ -110,7 +108,7 @@ To get all models where the Sqid is in a given array, you can use the `whereSqid
 
 ```php
 $users = User::query()
-    ->whereSqidIn('id', ['use_A3EyoEb2TO'])
+    ->whereSqidIn('id', ['usr_A3EyoEb2TO'])
     ->get();
 ```
 
@@ -122,7 +120,7 @@ To get all models where the Sqid is not in a given array, you can use the `where
 
 ```php
 $users = User::query()
-    ->whereSqidNotIn('id', ['use_A3EyoEb2TO'])
+    ->whereSqidNotIn('id', ['usr_A3EyoEb2TO'])
     ->get();
 ```
 
@@ -134,7 +132,7 @@ Laravel Sqids supports route model binding out of the box. Simply create a route
 care of the rest:
 
 ```php
-// GET /users/use_A3EyoEb2TO
+// GET /users/usr_A3EyoEb2TO
 Route::get('users/{user}', function (User $user) {
     return "Hello $user->name";
 });
@@ -148,7 +146,7 @@ could be incredibly powerful when searching models across your application.
 ```php
 use RedExplosion\Sqids\Model;
 
-$model = Model::find('use_A3EyoEb2TO');
+$model = Model::find('usr_A3EyoEb2TO');
 ```
 
 When we run the following, `$user` will be an instance of the `User` model for the given Sqid. If no model could be
@@ -160,7 +158,7 @@ the `ModelNotFoundException`:
 ```php
 use RedExplosion\Sqids\Model;
 
-$model = Model::findOrFail('use_A3EyoEb2TO');
+$model = Model::findOrFail('usr_A3EyoEb2TO');
 ```
 
 > [!IMPORTANT]
@@ -182,7 +180,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability, please send an e-mail to Ben Sherred via ben@redexplosion.co.uk. All security
+If you discover a security vulnerability, please send an e-mail to Ben Sherred via ben@redexplosion.com. All security
 vulnerabilities will be promptly addressed.
 
 ## Credits
