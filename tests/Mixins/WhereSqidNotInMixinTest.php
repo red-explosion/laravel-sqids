@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Collection;
 use Workbench\App\Models\Customer;
 use Workbench\Database\Factories\CustomerFactory;
 
-it(description: 'can query all models except the given sqids', closure: function (): void {
+it('can query all models except the given sqids', function (): void {
     $customer = CustomerFactory::new()->create();
 
-    CustomerFactory::new()->count(count: 10)->create();
+    CustomerFactory::new()->count(10)->create();
 
     $customers = Customer::query()
-        ->whereSqidNotIn(column: 'id', sqids: [$customer->sqid])
+        ->whereSqidNotIn('id', [$customer->sqid])
         ->get();
 
     expect($customers)
-        ->toBeInstanceOf(class: Collection::class)
-        ->toHaveCount(count: 10)
+        ->toBeInstanceOf(Collection::class)
+        ->toHaveCount(10)
         ->pluck('id')->not->toContain($customer->id);
 });

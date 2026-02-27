@@ -27,7 +27,7 @@ it('can get the sqid prefix', function (): void {
 it('can get the key from the sqid', function (): void {
     $customer = CustomerFactory::new()->create();
 
-    expect(Customer::keyFromSqid(sqid: $customer->sqid))
+    expect(Customer::keyFromSqid($customer->sqid))
         ->toBe(1);
 });
 

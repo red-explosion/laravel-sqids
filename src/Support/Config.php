@@ -27,7 +27,7 @@ class Config
 
     public static function shuffleKey(): ?string
     {
-        $shuffleKey = config(key: 'sqids.shuffle_key');
+        $shuffleKey = config('sqids.shuffle_key');
 
         if (! is_string($shuffleKey)) {
             return null;
@@ -38,7 +38,7 @@ class Config
 
     public static function alphabet(): string
     {
-        $alphabet = config(key: 'sqids.alphabet');
+        $alphabet = config('sqids.alphabet');
 
         if (! $alphabet || ! is_string($alphabet)) {
             return static::$defaultAlphabet;
@@ -50,7 +50,7 @@ class Config
     public static function minLength(): int
     {
         /** @var int|null $minLength */
-        $minLength = config(key: 'sqids.min_length', default: static::$defaultMinLength);
+        $minLength = config('sqids.min_length', static::$defaultMinLength);
 
         if (! $minLength || ! is_int($minLength)) {
             return static::$defaultMinLength;
@@ -64,7 +64,7 @@ class Config
      */
     public static function blacklist(): array
     {
-        $blacklist = config(key: 'sqids.blacklist', default: static::$defaultBlacklist);
+        $blacklist = config('sqids.blacklist', static::$defaultBlacklist);
 
         if (! is_array($blacklist)) {
             return static::$defaultBlacklist;
@@ -75,9 +75,9 @@ class Config
 
     public static function separator(): string
     {
-        $separator = config(key: 'sqids.separator', default: static::$defaultSeparator);
+        $separator = config('sqids.separator', static::$defaultSeparator);
 
-        if (! $separator || ! is_string(value: $separator)) {
+        if (! $separator || ! is_string($separator)) {
             return static::$defaultSeparator;
         }
 
@@ -86,7 +86,7 @@ class Config
 
     public static function prefixClass(): ?Prefix
     {
-        $prefix = config(key: 'sqids.prefix_class');
+        $prefix = config('sqids.prefix_class');
 
         if (! $prefix) {
             return null;

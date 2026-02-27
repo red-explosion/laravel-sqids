@@ -13,6 +13,6 @@ class WhereSqidMixin
     public function whereSqid(): Closure
     {
         /** @phpstan-ignore-next-line */
-        return fn (string $sqid) => $this->whereKey(id: $this->getModel()->keyFromSqid(sqid: $sqid));
+        return fn (string $sqid) => $this->whereKey($this->getModel()->keyFromSqid($sqid));
     }
 }

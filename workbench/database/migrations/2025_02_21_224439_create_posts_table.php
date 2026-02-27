@@ -13,7 +13,7 @@ return new class() extends Migration
      */
     public function up(): void
     {
-        Schema::create(table: 'posts', callback: function (Blueprint $table): void {
+        Schema::create('posts', function (Blueprint $table): void {
             $table->id();
             $table->string('title');
             $table->string('slug');
@@ -26,6 +26,6 @@ return new class() extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(table: 'posts');
+        Schema::dropIfExists('posts');
     }
 };

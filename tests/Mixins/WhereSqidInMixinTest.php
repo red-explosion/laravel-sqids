@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Collection;
 use Workbench\App\Models\Customer;
 use Workbench\Database\Factories\CustomerFactory;
 
-it(description: 'can query all models with the given sqids', closure: function (): void {
+it('can query all models with the given sqids', function (): void {
     $customer = CustomerFactory::new()->create();
 
-    CustomerFactory::new()->count(count: 10)->create();
+    CustomerFactory::new()->count(10)->create();
 
     $customers = Customer::query()
-        ->whereSqidIn(column: 'id', sqids: [$customer->sqid])
+        ->whereSqidIn('id', [$customer->sqid])
         ->get();
 
     expect($customers)
-        ->toBeInstanceOf(class: Collection::class)
-        ->toHaveCount(count: 1)
-        ->first()->toBeInstanceOf(class: Customer::class)
+        ->toBeInstanceOf(Collection::class)
+        ->toHaveCount(1)
+        ->first()->toBeInstanceOf(Customer::class)
         ->first()->is($customer);
 });

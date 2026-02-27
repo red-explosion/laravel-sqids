@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RedExplosion\Sqids\Concerns;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
@@ -20,7 +20,7 @@ trait HasSqids
 
     public function getSqidAttribute(): ?string
     {
-        return Sqids::forModel(model: $this);
+        return Sqids::forModel($this);
     }
 
     public function getSqidPrefix(): ?string
@@ -43,29 +43,29 @@ trait HasSqids
      * @param  mixed  $value
      * @param  null  $field
      */
-    public function resolveRouteBindingQuery($query, $value, $field = null): Builder|Relation
+    public function resolveRouteBindingQuery($query, $value, $field = null): Builder
     {
         if ($field && $field !== 'sqid') {
-            return parent::resolveRouteBindingQuery(query: $query, value: $value, field: $field);
+            return parent::resolveRouteBindingQuery($query, $value, $field);
         }
 
         if (! $field && $this->getRouteKeyName() !== 'sqid') {
-            return parent::resolveRouteBindingQuery(query: $query, value: $value, field: $field);
+            return parent::resolveRouteBindingQuery($query, $value, $field);
         }
 
-        return $query->whereSqid(sqid: $value);
+        return $query->whereSqid($value);
     }
 
     public static function keyFromSqid(string $sqid): ?int
     {
-        $sqid = Str::afterLast(subject: $sqid, search: Config::separator());
+        $sqid = Str::afterLast($sqid, Config::separator());
 
-        $length = Str::length(value: $sqid);
+        $length = Str::length($sqid);
 
         if ($length < Config::minLength()) {
             return null;
         }
 
-        return Sqids::decodeId(model: __CLASS__, id: $sqid)[0] ?? null;
+        return Sqids::decodeId(__CLASS__, $sqid)[0] ?? null;
     }
 }

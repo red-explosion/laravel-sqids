@@ -19,9 +19,9 @@ class Sqids
             return null;
         }
 
-        $prefix = static::prefixForModel(model: $model::class);
+        $prefix = static::prefixForModel($model::class);
         $separator = $prefix ? Config::separator() : null;
-        $sqid = static::encodeId(model: $model::class, id: $id);
+        $sqid = static::encodeId($model::class, $id);
 
         return "{$prefix}{$separator}{$sqid}";
     }
@@ -45,12 +45,12 @@ class Sqids
             return null;
         }
 
-        return $prefixClass->prefix(model: $model);
+        return $prefixClass->prefix($model);
     }
 
     public static function encodeId(string $model, int $id): string
     {
-        return static::encoder(model: $model)->encode(numbers: [$id]);
+        return static::encoder($model)->encode([$id]);
     }
 
     /**
@@ -58,17 +58,17 @@ class Sqids
      */
     public static function decodeId(string $model, string $id): array
     {
-        return static::encoder(model: $model)->decode(id: $id);
+        return static::encoder($model)->decode($id);
     }
 
     public static function encoder(string $model): SqidsCore
     {
-        $model = mb_strtolower(string: class_basename($model));
+        $model = mb_strtolower(class_basename($model));
 
         return new SqidsCore(
-            alphabet: static::alphabetForModel(model: $model),
-            minLength: Config::minLength(),
-            blocklist: Config::blacklist(),
+            static::alphabetForModel($model),
+            Config::minLength(),
+            Config::blacklist(),
         );
     }
 
@@ -76,14 +76,14 @@ class Sqids
     {
         $alphabet = Config::alphabet();
         $shuffle = $model . Config::shuffleKey();
-        $shuffleLength = mb_strlen(string: $shuffle);
+        $shuffleLength = mb_strlen($shuffle);
 
         if (! $shuffleLength) {
             return Config::alphabet();
         }
 
-        $alphabetArray = static::multiByteSplit(string: Config::alphabet());
-        $shuffleArray = static::multiByteSplit(string: $shuffle);
+        $alphabetArray = static::multiByteSplit(Config::alphabet());
+        $shuffleArray = static::multiByteSplit($shuffle);
 
         for ($i = mb_strlen($alphabet) - 1, $v = 0, $p = 0; $i > 0; $i--, $v++) {
             $v %= $shuffleLength;
@@ -95,7 +95,7 @@ class Sqids
             $alphabetArray[$i] = $temp;
         }
 
-        return implode(separator: '', array: $alphabetArray);
+        return implode('', $alphabetArray);
     }
 
     /**
@@ -103,6 +103,6 @@ class Sqids
      */
     protected static function multiByteSplit(string $string): array
     {
-        return preg_split(pattern: '/(?!^)(?=.)/u', subject: $string) ?: [];
+        return preg_split('/(?!^)(?=.)/u', $string) ?: [];
     }
 }

@@ -14,7 +14,7 @@ class WhereSqidNotInMixin
     {
         return function (string $column, array $sqids, $boolean = 'and') {
             /** @phpstan-ignore-next-line  */
-            return $this->whereSqidIn(column: $column, sqids: $sqids, boolean: $boolean, not: true);
+            return $this->whereSqidIn($column, $sqids, $boolean, not: true);
         };
     }
 }

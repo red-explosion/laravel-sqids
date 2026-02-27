@@ -17,12 +17,12 @@ class ConsonantPrefix implements Prefix
      */
     public function prefix(string $model): string
     {
-        $classBasename = class_basename(class: $model);
+        $classBasename = class_basename($model);
 
         $prefix = str_replace(search: ['a', 'e', 'i', 'o', 'u'], replace: '', subject: $classBasename);
 
         $prefix = rtrim(mb_strimwidth(string: $prefix, start: 0, width: 3, encoding: 'UTF-8'));
 
-        return Str::lower(value: $prefix);
+        return Str::lower($prefix);
     }
 }

@@ -17,10 +17,10 @@ class SimplePrefix implements Prefix
      */
     public function prefix(string $model): string
     {
-        $classBasename = class_basename(class: $model);
+        $classBasename = class_basename($model);
 
         $prefix = rtrim(mb_strimwidth(string: $classBasename, start: 0, width: 3, encoding: 'UTF-8'));
 
-        return Str::lower(value: $prefix);
+        return Str::lower($prefix);
     }
 }

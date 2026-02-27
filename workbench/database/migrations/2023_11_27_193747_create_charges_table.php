@@ -13,10 +13,10 @@ return new class() extends Migration
      */
     public function up(): void
     {
-        Schema::create(table: 'charges', callback: function (Blueprint $table): void {
+        Schema::create('charges', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId(column: 'customer_id')->constrained()->cascadeOnDelete();
-            $table->integer(column: 'amount');
+            $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
+            $table->integer('amount');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class() extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(table: 'charges');
+        Schema::dropIfExists('charges');
     }
 };

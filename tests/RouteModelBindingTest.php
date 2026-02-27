@@ -10,8 +10,8 @@ it('can bind a model from a sqid', function (): void {
     $customer = CustomerFactory::new()->create();
 
     $this
-        ->get(uri: "/customers/{$customer->sqid}")
-        ->assertContent(value: $customer->name);
+        ->get("/customers/{$customer->sqid}")
+        ->assertContent($customer->name);
 });
 
 it('can bind a model from a sqid without a prefix', function (): void {
@@ -20,13 +20,13 @@ it('can bind a model from a sqid without a prefix', function (): void {
     $customer = CustomerFactory::new()->create();
 
     $this
-        ->get(uri: "/customers/{$customer->sqid}")
-        ->assertContent(value: $customer->name);
+        ->get("/customers/{$customer->sqid}")
+        ->assertContent($customer->name);
 });
 
 it('returns a 404 if the sqid is invalid', function (): void {
     $this
-        ->get(uri: '/customers/invalid-sqid')
+        ->get('/customers/invalid-sqid')
         ->assertNotFound();
 });
 
@@ -34,16 +34,16 @@ it('can bind a model with a different key', function (): void {
     $customer = CustomerFactory::new()->create();
 
     $this
-        ->get(uri: "/customers/username/{$customer->username}")
-        ->assertContent(value: $customer->username);
+        ->get("/customers/username/{$customer->username}")
+        ->assertContent($customer->username);
 });
 
 it('can bind a model when the route key has been overridden', function (): void {
     $post = PostFactory::new()->create();
 
     $this
-        ->get(uri: "/posts/{$post->slug}")
-        ->assertContent(value: $post->title);
+        ->get("/posts/{$post->slug}")
+        ->assertContent($post->title);
 });
 
 it('can scope route model bindings', function (): void {
@@ -51,8 +51,8 @@ it('can scope route model bindings', function (): void {
     $charge = ChargeFactory::new()->for($customer)->create();
 
     $this
-        ->get(uri: "/customers/{$customer->sqid}/{$charge->sqid}")
-        ->assertContent(value: $charge->sqid);
+        ->get("/customers/{$customer->sqid}/{$charge->sqid}")
+        ->assertContent($charge->sqid);
 });
 
 it('returns a 404 if the child isn’t scoped to the parent', function (): void {
@@ -60,6 +60,6 @@ it('returns a 404 if the child isn’t scoped to the parent', function (): void 
     $charge = ChargeFactory::new()->create();
 
     $this
-        ->get(uri: "/customers/{$customer->sqid}/{$charge->sqid}")
+        ->get("/customers/{$customer->sqid}/{$charge->sqid}")
         ->assertNotFound();
 });

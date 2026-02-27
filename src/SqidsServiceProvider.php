@@ -16,18 +16,15 @@ class SqidsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(path: __DIR__ . '/../config/sqids.php', key: 'sqids');
+        $this->mergeConfigFrom(__DIR__ . '/../config/sqids.php', 'sqids');
     }
 
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes(
-                paths: [
-                    __DIR__ . '/../config/sqids.php' => config_path('sqids.php'),
-                ],
-                groups: 'sqids-config',
-            );
+            $this->publishes([
+                __DIR__ . '/../config/sqids.php' => config_path('sqids.php'),
+            ], 'sqids-config');
         }
 
         $this->bootBuilderMixins();

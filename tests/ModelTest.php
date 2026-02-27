@@ -15,15 +15,15 @@ it('can find a model from the sqid', function (): void {
 
     $charge = ChargeFactory::new()->create(['amount' => 2000]);
 
-    expect(Model::find(sqid: 'invalid-sqid'))
+    expect(Model::find('invalid-sqid'))
         ->toBeNull()
-        ->and(Model::find(sqid: $jane->sqid))
+        ->and(Model::find($jane->sqid))
         ->toBeInstanceOf(Customer::class)
         ->name->toBe('Jane')
-        ->and(Model::find(sqid: $charge->sqid))
+        ->and(Model::find($charge->sqid))
         ->toBeInstanceOf(Charge::class)
         ->amount->toBe(2000)
-        ->and(Model::find(sqid: $john->sqid))
+        ->and(Model::find($john->sqid))
         ->toBeInstanceOf(Customer::class)
         ->name->toBe('John');
 });
@@ -31,11 +31,11 @@ it('can find a model from the sqid', function (): void {
 it('can find a model from the sqid or throw an exception', function (): void {
     $customer = CustomerFactory::new()->create();
 
-    expect(Model::findOrFail(sqid: $customer->sqid))
+    expect(Model::findOrFail($customer->sqid))
         ->toBeInstanceOf(Customer::class)
         ->name->toBe($customer->name);
 
     $this->expectException(ModelNotFoundException::class);
 
-    Model::findOrFail(sqid: 'invalid-sqid');
+    Model::findOrFail('invalid-sqid');
 });

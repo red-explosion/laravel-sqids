@@ -24,7 +24,7 @@ class Model
     public static function find(string $sqid): ?EloquentModel
     {
         $models = static::models();
-        $prefix = Str::beforeLast(subject: $sqid, search: Config::separator());
+        $prefix = Str::beforeLast($sqid, Config::separator());
 
         /** @var class-string<EloquentModel>|null $model */
         $model = $models[$prefix] ?? null;
@@ -34,13 +34,13 @@ class Model
         }
 
         /** @phpstan-ignore-next-line */
-        return $model::query()->findBySqid(sqid: $sqid);
+        return $model::query()->findBySqid($sqid);
     }
 
     public static function findOrFail(string $sqid): EloquentModel
     {
         $models = static::models();
-        $prefix = Str::beforeLast(subject: $sqid, search: Config::separator());
+        $prefix = Str::beforeLast($sqid, Config::separator());
 
         /** @var class-string<EloquentModel>|null $model */
         $model = $models[$prefix] ?? null;
@@ -50,7 +50,7 @@ class Model
         }
 
         /** @phpstan-ignore-next-line */
-        return $model::query()->findBySqidOrFail(sqid: $sqid);
+        return $model::query()->findBySqidOrFail($sqid);
     }
 
     /**
@@ -60,22 +60,22 @@ class Model
     {
         /** @var array<string, class-string<EloquentModel>> $models */
         $models = collect(static::getFilesRecursively())
-            ->map(fn (SplFileInfo $file) => self::fullQualifiedClassNameFromFile(file: $file))
+            ->map(fn (SplFileInfo $file) => self::fullQualifiedClassNameFromFile($file))
             ->map(function (string $class): ?ReflectionClass {
                 try {
                     /** @phpstan-ignore-next-line */
-                    return new ReflectionClass(objectOrClass: $class);
+                    return new ReflectionClass($class);
                 } catch (Exception|Error) {
                     return null;
                 }
             })
             ->filter()
             /** @phpstan-ignore-next-line */
-            ->filter(fn (ReflectionClass $class): bool => $class->isSubclassOf(class: EloquentModel::class))
+            ->filter(fn (ReflectionClass $class): bool => $class->isSubclassOf(EloquentModel::class))
             /** @phpstan-ignore-next-line */
             ->filter(fn (ReflectionClass $class) => ! $class->isAbstract())
             /** @phpstan-ignore-next-line */
-            ->filter(fn (ReflectionClass $class) => in_array(needle: HasSqids::class, haystack: $class->getTraitNames()))
+            ->filter(fn (ReflectionClass $class) => in_array(HasSqids::class, $class->getTraitNames()))
             /** @phpstan-ignore-next-line */
             ->mapWithKeys(function (ReflectionClass $reflectionClass): array {
                 /** @var class-string<EloquentModel> $model */
@@ -95,10 +95,10 @@ class Model
      */
     protected static function namespaces(): array
     {
-        $composer = File::json(path: base_path(path: 'composer.json'));
+        $composer = File::json(base_path('composer.json'));
 
         /** @var array<string, string> $namespaces */
-        $namespaces = Arr::get(array: $composer, key: 'autoload.psr-4', default: []);
+        $namespaces = Arr::get($composer, 'autoload.psr-4', default: []);
 
         return array_flip($namespaces);
     }
@@ -108,10 +108,10 @@ class Model
         /** @var Application $application */
         $application = app();
 
-        return Str::of(string: $file->getRealPath())
+        return Str::of($file->getRealPath())
             ->replaceFirst(search: static::basePath(), replace: '')
             ->replaceLast(search: '.php', replace: '')
-            ->trim(characters: DIRECTORY_SEPARATOR)
+            ->trim(DIRECTORY_SEPARATOR)
             ->replace(
                 search: array_keys(static::namespaces()),
                 replace: array_values(static::namespaces())
@@ -132,12 +132,12 @@ class Model
         $files = [];
 
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(
-            directory: static::basePath(),
+            static::basePath(),
         ));
 
         /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            if ($file->isDir() || str_contains(haystack: $file->getRealPath(), needle: 'vendor')) {
+            if ($file->isDir() || str_contains($file->getRealPath(), 'vendor')) {
                 continue;
             }
 
@@ -153,7 +153,7 @@ class Model
         $application = app();
 
         if ($application->runningUnitTests()) {
-            $basePath = new SplFileInfo(base_path(path: '../../../../'));
+            $basePath = new SplFileInfo(base_path('../../../../'));
 
             return $basePath->getRealPath();
         }

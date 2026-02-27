@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Workbench\App\Models\Customer;
 use Workbench\Database\Factories\CustomerFactory;
 
-it(description: 'can find or fail a model by its sqid', closure: function (): void {
+it('can find or fail a model by its sqid', function (): void {
     $customer = CustomerFactory::new()->create();
     $sqid = $customer->sqid;
 
-    expect(Customer::findBySqidOrFail(sqid: $sqid))
+    expect(Customer::findBySqidOrFail($sqid))
         ->toBeInstanceOf(Customer::class)
         ->is($customer)->toBeTrue();
 
     $this->expectException(ModelNotFoundException::class);
 
-    Customer::findBySqidOrFail(sqid: 'missing-sqid');
+    Customer::findBySqidOrFail('missing-sqid');
 });
 
-it(description: 'can find or fail a model by its sqid from a specific column', closure: function (): void {
+it('can find or fail a model by its sqid from a specific column', function (): void {
     $customer = CustomerFactory::new()->create();
     $sqid = $customer->sqid;
 
-    expect(Customer::findBySqidOrFail(sqid: $sqid, columns: ['id']))
+    expect(Customer::findBySqidOrFail($sqid, ['id']))
         ->toBeInstanceOf(Customer::class)
         ->is($customer)->toBeTrue();
 
     $this->expectException(ModelNotFoundException::class);
 
-    Customer::findBySqidOrFail(sqid: 'missing-sqid', columns: ['id']);
+    Customer::findBySqidOrFail('missing-sqid', ['id']);
 });
