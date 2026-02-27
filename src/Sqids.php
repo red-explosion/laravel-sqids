@@ -58,7 +58,20 @@ class Sqids
      */
     public static function decodeId(string $model, string $id): array
     {
-        return static::encoder($model)->decode($id);
+        $decodedIds = static::encoder($model)->decode($id);
+
+        if (empty($decodedIds)) {
+            return [];
+        }
+
+        $decodedId = $decodedIds[0];
+        $encodedId = static::encodeId($model, $decodedId);
+
+        if ($id !== $encodedId) {
+            return [];
+        }
+
+        return $decodedIds;
     }
 
     public static function encoder(string $model): SqidsCore
