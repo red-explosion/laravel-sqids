@@ -126,6 +126,48 @@ $users = User::query()
 
 This will return all users where the `id` is not in the array of decoded Sqids.
 
+### Validation Rule
+
+There may be times where you need to validate a sqid in a form request. Laravel Sqids provides a `SqidsExists` rule to
+handle this automatically.
+
+```php
+use RedExplosion\Sqids\Rules\SqidExists;
+
+$validated = validator(
+    ['customer_id' => 'cus_A3EyoEb2TO'],
+    ['customer_id' => [new SqidExists(Customer::class)]],
+)->validate();
+```
+
+The rule validates that the sqid can be decoded for the given model and that the model exists.
+
+You can also add query constraints similar to Laravel's `Rule::exists`:
+
+```php
+use RedExplosion\Sqids\Rules\SqidExists;
+
+$rule = (new SqidExists(Post::class))
+    ->where('team_id', $team->id)
+    ->withoutTrashed();
+
+$validated = validator(
+    ['post' => 'pst_A3EyoEb2TO'],
+    ['post' => [$rule]],
+)->validate();
+```
+
+Available constraints:
+
+- `where($column, $value)`
+- `whereNot($column, $value)`
+- `whereNull($column)`
+- `whereNotNull($column)`
+- `whereIn($column, $values)`
+- `whereNotIn($column, $values)`
+- `withoutTrashed()`
+- `onlyTrashed()`
+
 ### Route model binding
 
 Laravel Sqids supports route model binding out of the box. Simply create a route as you normally would and we'll take
